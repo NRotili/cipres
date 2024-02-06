@@ -13,3 +13,8 @@ Route::get('createcatalogue', [HomeController::class, 'catalogue'])->name('panel
 
 Route::resource('products', ProductController::class)->names('panel.products');
 Route::resource('catalogues', CatalogueController::class)->names('panel.catalogues');
+
+Route::get('productos/importar', [ProductController::class, 'importar'])->name('panel.productos.importar');
+
+// --------------- ********  EXCEL ******* --------------- //
+Route::post('productos/importar', [ProductController::class, 'importarproductos'])->name('administracion.productos.importarproductos');

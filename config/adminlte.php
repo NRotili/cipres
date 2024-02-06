@@ -90,6 +90,29 @@ return [
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
 
+     /*
+    |--------------------------------------------------------------------------
+    | Preloader Animation
+    |--------------------------------------------------------------------------
+    |
+    | Here you can change the preloader animation configuration.
+    |
+    | For detailed instructions you can look the preloader section here:
+    | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Basic-Configuration
+    |
+    */
+
+    'preloader' => [
+        'enabled' => false,
+        'img' => [
+            'path' => '',
+            'alt' => 'AdminLTE Preloader Image',
+            'effect' => 'animation__shake',
+            'width' => 100,
+            'height' => 73,
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Views Classes
