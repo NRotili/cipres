@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->get('/', [HomeController::class, 'index'])->name('panel.index');
 
-Route::get('catalogo/{catalogue?}', [HomeController::class, 'catalogue'])->name('panel.createcatalogue');
+Route::get('catalogo/{tipo}/{catalogue?}', [HomeController::class, 'catalogue'])->name('panel.createcatalogue');
 
 Route::get('enviaWsp/{number}/{message}', function ($number, $message) {
     $response = Http::post('http://localhost:3000/api/send', [

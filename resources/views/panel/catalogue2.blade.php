@@ -27,7 +27,7 @@
    
         <script src="{{ mix('js/app.js') }}"></script>
         @livewireScripts
-   @livewire('catalogues-index', ['catalogue' => $catalogue])
+   @livewire('catalogues-index', ['catalogue' => $catalogue, 'tipo' => $tipo])
 
 </body>
 

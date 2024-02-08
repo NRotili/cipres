@@ -22,7 +22,8 @@ class CataloguesIndex extends Component
             // $catalog = Catalogue::find(1)
                         // ->get();
 
-            $catalog = Catalogue::where('nombre', $this->catalogue)->get(); 
+            $catalog = Catalogue::where('nombre', $this->catalogue)
+                                ->get(); 
             foreach ($catalog as $item) {
                 $id = $item->id;
             }
@@ -31,6 +32,7 @@ class CataloguesIndex extends Component
 
             $products = Catalogue::find($id)->products()
                         ->where('nombre','LIKE','%'.$this->search.'%')
+                        ->where('estado', 1)
                         ->orderBy('nombre')
                         ->get();
 

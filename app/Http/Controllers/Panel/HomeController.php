@@ -18,7 +18,7 @@ class HomeController extends Controller
     }
 
 
-    public function catalogue($catalogue = null)
+    public function catalogue($tipo, $catalogue = null)
     {
 
         // $data = [
@@ -46,8 +46,7 @@ class HomeController extends Controller
         //     return view('panel.catalogue2', compact('products','catalogue'));
         // }  
 
-        return view('panel.catalogue2', compact('catalogue'));
-       
+        return view('panel.catalogue2', compact('tipo', 'catalogue'));
 
     }
 }
