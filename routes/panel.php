@@ -18,3 +18,16 @@ Route::get('productos/importar', [ProductController::class, 'importar'])->name('
 
 // --------------- ********  EXCEL ******* --------------- //
 Route::post('productos/importar', [ProductController::class, 'importarproductos'])->name('administracion.productos.importarproductos');
+
+
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/artisan/{command}', function ($command) {
+    // Ejecutar el comando Artisan proporcionado en la URL
+    $output = Artisan::call($command);
+
+    // Obtener la salida del comando
+    $output = Artisan::output();
+
+    return response()->json(['output' => $output]);
+});
