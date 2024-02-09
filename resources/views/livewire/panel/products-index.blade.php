@@ -20,7 +20,7 @@
 
 
     @if ($products->count())
-        
+
         <div class="card-body">
             <table class="table table-striped">
                 <thead>
@@ -35,11 +35,11 @@
                 </thead>
                 <tbody>
                     @foreach ($products as $product)
-                        <tr>
-                            <td>{{$product->codigo_producto}}-{{$product->codigo_subproducto}}</td>
-                            <td>{{$product->nombre}}</td>
-                            <td>{{$product->precioventa2}}</td>
-                            <td>{{$product->precioventa3}}</td>
+                        <tr @if (!$product->estado) style="text-decoration:line-through" @endif>
+                            <td>{{ $product->codigo_producto }}-{{ $product->codigo_subproducto }}</td>
+                            <td>{{ $product->nombre }}</td>
+                            <td>{{ $product->precioventa2 }}</td>
+                            <td>{{ $product->precioventa3 }}</td>
                             <td>{{ \Carbon\Carbon::parse($product->updated_at)->format('d/m/Y - H:i') }}</td>
                             {{-- <td width="10px">
                                 <a class="btn btn-primary btn-sm" href="{{route('panel.products.edit', $product)}}"><i class="fas fa-pen"></i></a>
@@ -47,26 +47,26 @@
                             <td width="10px">
                                 <div class="btn-group">
 
-                                <a class="btn btn-secondary btn-sm" href="{{route('panel.products.edit', $product)}}" data-toggle="tooltip"
-                                title="Editar" data-container=".content"><i class="fas fa-pen"></i></a>
-                                {{-- active or inactive button --}}
-                                @if ($product->estado)
-                                    <a class="btn btn-warning btn-sm" wire:click="change_status({{$product->id}}, 0)"><i class="fas fa-ban" data-toggle="tooltip"
-                                        title="Desactivar" data-container=".content"></i></a>
-                                @else
-                                    
-                                    <a class="btn btn-success btn-sm" data-toggle="tooltip"
-                                    title="Activar" data-container=".content" wire:click="change_status({{$product->id}}, 1)"><i class="fas fa-check"></i></a>
-                                @endif
-                                <a class="btn btn-danger btn-sm" data-toggle="tooltip"
-                                title="Eliminar" data-container=".content" wire:click="destroy({{$product->id}}) href="{{route('panel.products.edit', $product)}}"><i class="fas fa-trash"></i></a>
+                                    <a class="btn btn-secondary btn-sm"
+                                        href="{{ route('panel.products.edit', $product) }}" data-toggle="tooltip"
+                                        title="Editar" data-container=".content"><i class="fas fa-pen"></i></a>
+                                    {{-- active or inactive button --}}
+                                    @if ($product->estado)
+                                        <a class="btn btn-warning btn-sm"
+                                            wire:click="change_status({{ $product->id }}, 0)"><i class="fas fa-ban"
+                                                data-toggle="tooltip" title="Desactivar"
+                                                data-container=".content"></i></a>
+                                    @else
+                                        <a class="btn btn-success btn-sm" data-toggle="tooltip" title="Activar"
+                                            data-container=".content"
+                                            wire:click="change_status({{ $product->id }}, 1)"><i
+                                                class="fas fa-check"></i></a>
+                                    @endif
 
                                 </div>
 
                             </td>
-                            {{-- <td width="10px">
-                                
-                            </td> --}}
+
                         </tr>
                     @endforeach
                 </tbody>
@@ -74,12 +74,11 @@
         </div>
 
         <div class="card-footer">
-            {{$products->links()}}
+            {{ $products->links() }}
         </div>
     @else
-        <div class="card-body">        
+        <div class="card-body">
             <strong>No hay ningún registro</strong>
         </div>
     @endif
 </div>
-

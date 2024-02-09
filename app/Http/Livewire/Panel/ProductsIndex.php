@@ -12,7 +12,7 @@ class ProductsIndex extends Component
     use WithPagination;
     protected $paginationTheme= "bootstrap";
 
-    public $nombre, $codigo;
+    public $nombre, $codigo, $productoEliminar;
 
     public function updatingNombre()
     {
@@ -35,7 +35,7 @@ class ProductsIndex extends Component
             $query->where('codigo_producto','LIKE','%' . $codigoBuscar . '%');
         })
         ->when($subcodigoBuscar, function($query, $subcodigoBuscar){
-            $query->where('codigo_subproducto ','LIKE','%' . $subcodigoBuscar . '%');
+            $query->where('codigo_subproducto','LIKE','%' . $subcodigoBuscar . '%');
         })
         ->orderBy('nombre', 'asc')
         ->paginate();
@@ -48,16 +48,5 @@ class ProductsIndex extends Component
         $product = Product::find($id);
         $product->estado = !$product->estado;
         $product->save();
-    }
-
-    public function destroy($id)
-    {
-        //Eliminar
-
-        $product = Product::find($id);
-        $product->delete();
-        //Mensaje
-        session()->flash('message', 'El producto se eliminó con éxito');
-        $this->resetPage();
     }
 }

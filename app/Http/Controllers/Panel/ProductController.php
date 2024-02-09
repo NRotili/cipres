@@ -29,7 +29,8 @@ class ProductController extends Controller
     {
         $request->validate([
             'nombre' => 'required',
-            'costo_minorista' => 'required'
+            'precioventa2' => 'required|numeric',
+            'precioventa3' => 'required|numeric',
         ]);
 
 

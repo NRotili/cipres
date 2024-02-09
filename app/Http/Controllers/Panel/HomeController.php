@@ -48,7 +48,7 @@ class HomeController extends Controller
 
         Catalogue::where('nombre', $catalogue)->firstOrFail();
 
-        if (($tipo != 'revendedor' && $tipo != 'consfinal') || $catalogue == null) {
+        if ($tipo != 'revendedor' && $tipo != 'consfinal') {
             //return 404
             abort(404);
         }

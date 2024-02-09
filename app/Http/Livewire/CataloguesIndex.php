@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Models\Catalogue;
 use App\Models\Product;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Barryvdh\Debugbar\Twig\Extension\Debug;
 use Livewire\Component;
 
 class CataloguesIndex extends Component
@@ -18,37 +20,32 @@ class CataloguesIndex extends Component
     public function render()
     {
         
-        if(!empty($this->catalogue)){
-            // $catalog = Catalogue::find(1)
-                        // ->get();
+
 
             $catalog = Catalogue::where('nombre', $this->catalogue)
                                 ->first(); 
-            // foreach ($catalog as $item) {
-            //     $id = $item->id;
-            // }
 
             
+            if($this->tipo == 'revendedor') {
+                $products = Catalogue::find($catalog->id)->products()
+                ->where('nombre','LIKE','%'.$this->search.'%')
+                ->where('estado', 1)
+                ->orderBy('nombre')
+                ->get();
 
-            $products = Catalogue::find($catalog->id)->products()
-                        ->where('nombre','LIKE','%'.$this->search.'%')
-                        ->where('estado', 1)
-                        ->orderBy('nombre')
-                        ->get();
-
+            } elseif($this->tipo == 'consfinal'){
+                $products = Catalogue::find($catalog->id)->products()
+                ->where('nombre','LIKE','%'.$this->search.'%')
+                ->where('estado', 1)
+                ->orderBy('nombre')
+                ->get();
+            } else {
+                abort(404);
+            }
             // $products = Product::all()->catalogues($cataloguemodel->id);
             return view('livewire.catalogues-index', compact('products'));
             
             // return view('panel.catalogue2', compact('products', 'catalogue'));
-        } else {
-
-            $products = Product::where('nombre','LIKE','%'.$this->search.'%')
-                        ->orderBy('nombre')->get();
-            $catalogue = "Catálogo";
-            return view('livewire.catalogues-index', compact('products','catalogue'));
-
-            // return view('panel.catalogue2', compact('products','catalogue'));
-        }
 
     }
 }
