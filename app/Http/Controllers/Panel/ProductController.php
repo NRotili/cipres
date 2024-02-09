@@ -61,7 +61,7 @@ class ProductController extends Controller
     {
         $catalogues = Catalogue::all();
 
-        return view('panel.productos.edit', compact('catalogues', 'product')); 
+        return view('panel.productos.edit', compact('catalogues', 'product'));
     }
 
     public function update(Request $request, Product $product)
@@ -74,11 +74,11 @@ class ProductController extends Controller
                 Storage::delete($product->image->url);
 
                 $product->image->update([
-                    'url'=>$url
+                    'url' => $url
                 ]);
             } else {
                 $product->image()->create([
-                    'url'=> $url
+                    'url' => $url
                 ]);
             }
         }
@@ -91,7 +91,7 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return redirect()->route('panel.products.index')->with('info','El producto se eliminó con éxito');
+        return redirect()->route('panel.products.index')->with('info', 'El producto se eliminó con éxito');
     }
 
     public function importar()
@@ -126,8 +126,10 @@ class ProductController extends Controller
 
 
         if ($request->hasFile('file')) {
-            $path = $request->file->getRealPath();
-            $data = Excel::import(new ProductosImport, $path);
+            // $path = $request->file->getRealPath();
+            // $path1 = $request->file('mcafile')->store('temp');
+            // $path = storage_path('app') . '/' . $path1;
+            $data = Excel::import(new ProductosImport, $request->file);
             if ($data) {
                 toastr()->title('Información')
                     ->success('Productos importados correctamente.')
