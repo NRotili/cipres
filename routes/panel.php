@@ -31,3 +31,10 @@ Route::get('/artisan/{command}', function ($command) {
 
     return response()->json(['output' => $output]);
 });
+
+Route::get('/crear-enlace-storage', function () {
+    // Ejecutar el comando Artisan para crear el enlace simbólico storage:link
+    Artisan::call('storage:link');
+
+    return 'Enlace simbólico creado correctamente.';
+});
