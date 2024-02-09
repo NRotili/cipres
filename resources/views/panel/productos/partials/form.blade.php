@@ -8,27 +8,27 @@
 </div>
 
 <div class="row">
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-6">
         <div class="form-group">
-            {!! Form::label('costo_minorista', 'Costo minorista') !!}
-            {!! Form::number('costo_minorista', null, ['class' => 'form-control', 'placeholder' => 'Ingrese costo minorista']) !!}
+            {!! Form::label('precioventa2', 'Precio venta 2') !!}
+            {!! Form::number('precioventa2', null, ['class' => 'form-control', 'placeholder' => 'Ingrese precio venta 2']) !!}
 
             @error('costo_minorista')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
     </div>
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-6">
         <div class="form-group">
-            {!! Form::label('costo_mayorista', 'Costo mayorista') !!}
-            {!! Form::number('costo_mayorista', null, ['class'=>'form-control', 'placeholder'=>'Ingrese costo mayorista']) !!}
+            {!! Form::label('precioventa3', 'Precio venta3') !!}
+            {!! Form::number('precioventa3', null, ['class'=>'form-control', 'placeholder'=>'Ingrese precio venta 3']) !!}
             
             @error('costo_mayorista')
                 <small class="text-danger">{{$message}}</small>
             @enderror
         </div>
     </div>
-    <div class="col-12 col-md-4">
+    {{-- <div class="col-12 col-md-4">
         <div class="form-group">
             {!! Form::label('descuento', 'Descuento (%)') !!}
             {!! Form::number('descuento', null, ['class'=>'form-control', 'placeholder'=>'Ingrese descuento']) !!}
@@ -37,7 +37,7 @@
                 <small class="text-danger">{{$message}}</small>
             @enderror
         </div>
-    </div>
+    </div> --}}
 </div>
 
 <div class="form-group">
