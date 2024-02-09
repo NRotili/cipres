@@ -24,8 +24,8 @@ class ProductosImport implements ToCollection, WithHeadingRow
 
                 $producto->update([
                     'nombre' => $row['nombreproducto'],
-                    'costo_minorista' => (float)$row['precioventa3'],
-                    'costo_mayorista' => (float)$row['precioventa2'],
+                    'precioventa3' => (float)$row['precioventa3'],
+                    'precioventa2' => (float)$row['precioventa2'],
                     'codigo_producto' => $row['codigoproducto'],
                     'codigo_subproducto' => $row['codigosubproducto'],
                 ]);
@@ -39,8 +39,8 @@ class ProductosImport implements ToCollection, WithHeadingRow
                 
                 Product::create([
                     'nombre' => $row['nombreproducto'],
-                    'costo_minorista' => (float)$row['precioventa3'],
-                    'costo_mayorista' => (float)$row['precioventa2'],
+                    'precioventa3' => (float)$row['precioventa3'],
+                    'precioventa2' => (float)$row['precioventa2'],
                     'codigo_producto' => $row['codigoproducto'],
                     'codigo_subproducto' => $row['codigosubproducto'],
                     'estado' => '0'

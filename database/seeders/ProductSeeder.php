@@ -16,12 +16,12 @@ class ProductSeeder extends Seeder
     {
         Product::create([
             'nombre' => 'Bombita Defumacion "Sagrada Madre"',
-            'costo_minorista'=>69,
+            'precioventa2'=>69,
         ]);
 
         Product::create([
             'nombre' => 'Carbones Redondos "Sagrada Madre"',
-            'costo_minorista'=>6,
+            'precioventa2'=>6,
         ]);
     }
 }

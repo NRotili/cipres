@@ -74,7 +74,7 @@
                                                 <p class="">Costo</p>
                                             </div>
 
-                                            @if ($product->descuento)
+                                            {{-- @if ($product->descuento)
                                                 <div class="flex-1 inline-flex items-center">
                                                     <p class="text-center">Bulto cerrado</p>
                                                 </div>
@@ -84,7 +84,7 @@
                                                         <p class="text-center">+ 120 prod.</p>
                                                     </div>
                                                 @endif
-                                            @endif
+                                            @endif --}}
 
 
                                             
@@ -101,7 +101,7 @@
                                                 <p class="">{{ $product->costo_minorista }}</p>
                                             </div>
 
-                                            @if ($product->descuento)
+                                            {{-- @if ($product->descuento)
                                                 <div class="flex-1 inline-flex items-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                     class="h-4 w-4 text-gray-400"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <line x1="19" y1="5" x2="5" y2="19" />  <circle cx="6.5" cy="6.5" r="2.5" />  <circle cx="17.5" cy="17.5" r="2.5" /></svg>
@@ -120,7 +120,7 @@
                                                         <p class="">{{ $product->costo_mayorista }}</p>
                                                     </div>
                                                 @endif
-                                            @endif
+                                            @endif --}}
 
 
 

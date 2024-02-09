@@ -17,8 +17,8 @@ class CreateProductsTable extends Migration
             $table->id();
 
             $table->string('nombre');
-            $table->double('costo_minorista', 8, 2);
-            $table->double('costo_mayorista', 8, 2)->nullable();
+            $table->double('precioventa2', 8, 2);
+            $table->double('precioventa3', 8, 2)->nullable();
             
             $table->timestamps();
         });

@@ -1,16 +1,27 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('adminlte::page')
 
+@section('title', 'Profile')
+
+@section('content_header')
+    <h1>Perfil</h1>
+@stop
+
+@section('js')
+    
+@stop
+
+@section('content')
+<div class="card">
+<div class="card-body">
     <div>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                 @livewire('profile.update-profile-information-form')
 
-                <x-jet-section-border />
+                <div class="hidden sm:block">
+                    <div class="py-8">
+                        <div class="border-t border-gray-200"></div>
+                    </div>
+                </div>
             @endif
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
@@ -18,7 +29,11 @@
                     @livewire('profile.update-password-form')
                 </div>
 
-                <x-jet-section-border />
+                <div class="hidden sm:block">
+                    <div class="py-8">
+                        <div class="border-t border-gray-200"></div>
+                    </div>
+                </div>
             @endif
 
             @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
@@ -26,7 +41,11 @@
                     @livewire('profile.two-factor-authentication-form')
                 </div>
 
-                <x-jet-section-border />
+                <div class="hidden sm:block">
+                    <div class="py-8">
+                        <div class="border-t border-gray-200"></div>
+                    </div>
+                </div>
             @endif
 
             <div class="mt-10 sm:mt-0">
@@ -34,12 +53,18 @@
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasAccountDeletionFeatures())
-                <x-jet-section-border />
+            <div class="hidden sm:block">
+                <div class="py-8">
+                    <div class="border-t border-gray-200"></div>
+                </div>
+            </div>
 
                 <div class="mt-10 sm:mt-0">
                     @livewire('profile.delete-user-form')
                 </div>
             @endif
-        </div>
     </div>
-</x-app-layout>
+</div>
+</div>
+    
+@endsection

@@ -18,7 +18,7 @@ class HomeController extends Controller
     }
 
 
-    public function catalogue($tipo, $catalogue = null)
+    public function catalogue($tipo, $catalogue)
     {
 
         // $data = [
@@ -45,6 +45,13 @@ class HomeController extends Controller
         //     $catalogue = "Catálogo";
         //     return view('panel.catalogue2', compact('products','catalogue'));
         // }  
+
+        Catalogue::where('nombre', $catalogue)->firstOrFail();
+
+        if (($tipo != 'revendedor' && $tipo != 'consfinal') || $catalogue == null) {
+            //return 404
+            abort(404);
+        }
 
         return view('panel.catalogue2', compact('tipo', 'catalogue'));
 
