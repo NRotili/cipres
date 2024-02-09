@@ -127,9 +127,9 @@ class ProductController extends Controller
 
         if ($request->hasFile('file')) {
             // $path = $request->file->getRealPath();
-            // $path1 = $request->file('mcafile')->store('temp');
-            // $path = storage_path('app') . '/' . $path1;
-            $data = Excel::import(new ProductosImport, $request->file);
+            $path1 = $request->file->store('temp');
+            $path = storage_path('app') . '/' . $path1;
+            $data = Excel::import(new ProductosImport, $path);
             if ($data) {
                 toastr()->title('Información')
                     ->success('Productos importados correctamente.')
