@@ -12,7 +12,7 @@ class ProductsIndex extends Component
     use WithPagination;
     protected $paginationTheme= "bootstrap";
 
-    public $nombre, $codigo, $productoEliminar;
+    public $nombre, $codigo, $productoEliminar, $cantPagina = 10;
 
     public function updatingNombre()
     {
@@ -38,7 +38,7 @@ class ProductsIndex extends Component
             $query->where('codigo_subproducto','LIKE','%' . $subcodigoBuscar . '%');
         })
         ->orderBy('nombre', 'asc')
-        ->paginate();
+        ->paginate($this->cantPagina);
 
         return view('livewire.panel.products-index', compact('products'));
     }

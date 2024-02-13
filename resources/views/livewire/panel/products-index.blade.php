@@ -7,12 +7,23 @@
                 <input id="date" wire:model.lazy="codigo" type="text" class="form-control" placeholder="1-8">
 
             </div>
-            <div class="form-group col-md-9">
+            <div class="form-group col-md-7">
 
                 <label for="nombre">Filtrar por nombre</label>
                 <input id="nombre" wire:model="nombre" type="text" class="form-control"
                     placeholder="Buscar por nombre">
             </div>
+            {{-- Cant por página --}}
+            <div class="form-group col-md-2">
+                <label for="perPage">Cant. por página</label>
+                <select wire:model="cantPagina" class="form-control" id="perPage">
+                    <option value="5">5</option>
+                    <option selected value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
 
         </div>
         {{-- <input wire:model="search" class="form-control" placeholder="Ingrese nombre de un producto..."> --}}

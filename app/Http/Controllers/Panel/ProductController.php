@@ -31,6 +31,7 @@ class ProductController extends Controller
             'nombre' => 'required',
             'precioventa2' => 'required|numeric',
             'precioventa3' => 'required|numeric',
+            'codigo_producto' => 'required',
         ]);
 
 
@@ -66,6 +67,12 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        $request->validate([
+            'nombre' => 'required',
+            'precioventa2' => 'required|numeric',
+            'precioventa3' => 'required|numeric',
+            'codigo_producto' => 'required',
+        ]);
 
         $product->update($request->all());
         if ($request->file('file')) {
