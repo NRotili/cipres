@@ -14,7 +14,7 @@ class ProductosImport implements ToCollection, WithHeadingRow
         foreach ($rows as $row){
         
             //Validate if product exist in table productos with codigo.
-            $producto = Product::where('codigo_producto', $row['codigoproducto'])->where('codigo_subproducto', $row['codigosubproducto'])->first();
+            $producto = Product::where('codigo_producto', $row['codigoproducto'])->first();
             if ($producto) {
 
                 //If someone atributte is null, next producto
@@ -26,8 +26,6 @@ class ProductosImport implements ToCollection, WithHeadingRow
                     'nombre' => $row['nombreproducto'],
                     'precioventa3' => (float)$row['precioventa3'],
                     'precioventa2' => (float)$row['precioventa2'],
-                    'codigo_producto' => $row['codigoproducto'],
-                    'codigo_subproducto' => $row['codigosubproducto'],
                 ]);
 
 
@@ -42,7 +40,6 @@ class ProductosImport implements ToCollection, WithHeadingRow
                     'precioventa3' => (float)$row['precioventa3'],
                     'precioventa2' => (float)$row['precioventa2'],
                     'codigo_producto' => $row['codigoproducto'],
-                    'codigo_subproducto' => $row['codigosubproducto'],
                     'estado' => '0'
                 ]);
             }
