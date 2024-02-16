@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col col-12 col-md-8">
+    <div class="col col-12 col-md-6">
         <div class="form-group">
             {!! Form::label('nombre', 'Nombre') !!}
             {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del producto']) !!}
@@ -19,30 +19,16 @@
               @enderror
         </div>
     </div>
-    <div class="col col-6 col-md-2">
-        <div class="form-group">
-            {!! Form::label('codigo_subproducto', 'Subcódigo') !!}
-            {!! Form::text('codigo_subproducto', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el subcódigo']) !!}
-
-            @error('codigo_subproducto')
-                <small class="text-danger">{{ $message }}</small>
-            @enderror
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-2">
         <div class="form-group">
             {!! Form::label('precioventa2', 'Precio venta 2') !!}
             {!! Form::number('precioventa2', null, ['class' => 'form-control', 'placeholder' => 'Ingrese precio venta 2']) !!}
-
             @error('costo_minorista')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-2">
         <div class="form-group">
             {!! Form::label('precioventa3', 'Precio venta3') !!}
             {!! Form::number('precioventa3', null, ['class' => 'form-control', 'placeholder' => 'Ingrese precio venta 3']) !!}
@@ -52,6 +38,10 @@
             @enderror
         </div>
     </div>
+</div>
+
+<div class="row">
+    
     {{-- <div class="col-12 col-md-4">
         <div class="form-group">
             {!! Form::label('descuento', 'Descuento (%)') !!}
