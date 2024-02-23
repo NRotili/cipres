@@ -23,7 +23,7 @@
         <div class="form-group">
             {!! Form::label('precioventa2', 'Precio venta 2') !!}
             {!! Form::number('precioventa2', null, ['class' => 'form-control', 'placeholder' => 'Ingrese precio venta 2']) !!}
-            @error('costo_minorista')
+            @error('precioventa2')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
@@ -33,7 +33,7 @@
             {!! Form::label('precioventa3', 'Precio venta3') !!}
             {!! Form::number('precioventa3', null, ['class' => 'form-control', 'placeholder' => 'Ingrese precio venta 3']) !!}
 
-            @error('costo_mayorista')
+            @error('precioventa3')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
