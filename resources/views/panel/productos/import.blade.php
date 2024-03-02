@@ -11,6 +11,8 @@
 
 @section('content')
 
+@section('plugins.BsCustomFileInput', true)
+
     {{-- Instructions to import --}}
 
     <div class="card">
@@ -36,11 +38,6 @@
                         <li>
                             <p><strong>codigoproducto</strong> - </p>
                         </li>
-                        <li>
-                            <p><strong>codigosubproducto</strong> </p>
-                        </li>
-
-
 
                     </ul>
                     <li>Una vez completado el archivo, haga click en el botón "Importar".</li>
@@ -66,7 +63,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="file">Importar Productos</label>
-                    <x-adminlte-input-file name="file" igroup-size="sm" placeholder="Selecciona el archivo...">
+                    <x-adminlte-input-file name="file" igroup-size="sm" placeholder="Seleccione el archivo...">
                         <x-slot name="prependSlot">
                             <div class="input-group-text bg-lightblue">
                                 <i class="fas fa-upload"></i>
@@ -77,6 +74,8 @@
                 {{-- show errors --}}
                
                 <button type="submit" class="btn btn-primary">Importar</button>
+
+                
         
             </form>
         </div>
