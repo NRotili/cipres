@@ -332,6 +332,41 @@ return [
                 ],
             ],
         ],
+        'KrajeeFileinput' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/kartik-v/bootstrap-fileinput/css/fileinput.min.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/kartik-v/bootstrap-fileinput/themes/explorer-fa5/theme.min.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/kartik-v/bootstrap-fileinput/js/fileinput.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/kartik-v/bootstrap-fileinput/themes/fa5/theme.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/kartik-v/bootstrap-fileinput/themes/explorer-fa5/theme.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/kartik-v/bootstrap-fileinput/js/locales/es.js',
+                ],
+            ],
+        ],    
         'BsCustomFileInput' => [
             'active' => false,
             'files' => [

@@ -15,7 +15,7 @@
                     <div class="col-md-4">
                         <form class="d-flex input-group w-auto my-auto mb-3 mb-md-0">
 
-                            <input wire:model="search" autocomplete="off" type="search" class="form-control rounded" placeholder="Buscar producto..." />
+                            <input wire:model.live="search" autocomplete="off" type="search" class="form-control rounded" placeholder="Buscar producto..." />
                             <span class="input-group-text border-0 d-none d-lg-flex"><i
                                     class="fas fa-search text-white"></i></span>
                         </form>
