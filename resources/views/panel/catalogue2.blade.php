@@ -18,6 +18,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/tailwindcss@2.2.4/dist/tailwind.min.css" rel="stylesheet">
 
+
+
     
 
 
@@ -25,10 +27,11 @@
 
 <body class="bg-cover bg-no-repeat bg-center bg-fixed " style="background-image: url({{ asset('img/bg.jpg') }})">
    
+    @livewireScripts
         <script src="{{ mix('js/app.js') }}"></script>
-        @livewireScripts
    @livewire('catalogues-index', ['catalogue' => $catalogue, 'tipo' => $tipo])
 
 </body>
 
+   
 </html>
