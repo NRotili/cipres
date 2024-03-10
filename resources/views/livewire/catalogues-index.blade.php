@@ -13,13 +13,13 @@
                     </div>
 
                     <div class="col-md-4">
-                        <form class="d-flex input-group w-auto my-auto mb-3 mb-md-0">
+                        <div class="d-flex input-group w-auto my-auto mb-3 mb-md-0">
 
                             <input wire:model="search" autocomplete="off" type="search" class="form-control rounded"
                                 placeholder="Buscar producto..." />
                             <span class="input-group-text border-0 d-none d-lg-flex"><i
                                     class="fas fa-search text-white"></i></span>
-                        </form>
+                            </div>
                     </div>
 
                     <div class="col-md-4 d-flex justify-content-center justify-content-md-end align-items-center">
@@ -104,13 +104,10 @@
         </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        //luego de cargar todo, abrir mensaje de sweetalert "prueba"
-        Swal.fire({
-            title: "Todos los precios se encuentran sujetos a modificación",
-            text: "Última actualización de precios: {{ $fecha }}",
-            icon: "info"
-        });
-    </script>
+    <footer>
+        
+        <div class="fixed-bottom bg-gray-800  text-white text-center py-3">
+            <p>Precios sujetos a modificación sin previo aviso.</p>
+        </div>
+    </footer>
 </div>

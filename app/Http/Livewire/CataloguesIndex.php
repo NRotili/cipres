@@ -17,18 +17,11 @@ class CataloguesIndex extends Component
     public $tipo;
     public $fecha;
 
-    public function updatedSearch()
+    public function updatingSearch()
     {
         $this->resetPage();
     }
 
-    //mount
-    public function mount()
-    {
-        $this->fecha = Product::select('updated_at')->orderBy('updated_at', 'desc')->first();
-        //cambiar a formato dd/mm/yyyy hh:ii
-        $this->fecha = date('d/m/Y H:i', strtotime($this->fecha->updated_at));
-    }
 
     public function render()
     {

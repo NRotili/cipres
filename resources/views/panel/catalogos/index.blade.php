@@ -13,6 +13,7 @@
     </div>
     @endif
     
+    {{-- Include livewire panel.catalogues-index --}}
     @livewire('panel.catalogues-index')
 @stop
 
