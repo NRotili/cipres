@@ -17,12 +17,6 @@ class CataloguesIndex extends Component
     public $tipo;
     public $fecha;
 
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
-
-
     public function render()
     {
         

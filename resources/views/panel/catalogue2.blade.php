@@ -27,8 +27,8 @@
 
 <body class="bg-cover bg-no-repeat bg-center bg-fixed " style="background-image: url({{ asset('img/bg.jpg') }})">
    
+    <script src="{{ mix('js/app.js') }}"></script>
     @livewireScripts
-        <script src="{{ mix('js/app.js') }}"></script>
    @livewire('catalogues-index', ['catalogue' => $catalogue, 'tipo' => $tipo])
 
 </body>
