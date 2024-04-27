@@ -267,6 +267,27 @@ return [
             'route'  => 'panel.catalogues.index',
             'icon' => 'fas fa-fw fa-book-open',
         ],
+        ['header' => 'WHATSAPP'],
+        [
+            'text'=> 'Clientes',
+            'url' => '#',
+            'icon' => 'fas fa-fw fa-users',
+        ],
+        [
+            'text'=> 'Pedidos',
+            'url' => '#',
+            'icon' => 'fas fa-fw fa-shopping-cart',
+        ],
+        [
+            'text' => 'Chats',
+            'url'  => '#',
+            'icon' => 'fas fa-fw fa-comments',
+        ],
+        [
+            'text' => 'Mensajes',
+            'url'  => '#',
+            'icon' => 'fas fa-fw fa-envelope',
+        ],
 
         ['header' => 'account_settings'],
         [
