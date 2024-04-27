@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <input wire:model="search" class="form-control" placeholder="Ingrese nombre de catálogo...">
+        <input wire:model.live="search" class="form-control" placeholder="Ingrese nombre de catálogo...">
     </div>
 
 

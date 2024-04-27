@@ -4,19 +4,19 @@
             <div class="form-group col-md-2">
 
                 <label for="date">Filtrar por código</label>
-                <input id="date" wire:model="codigo" type="number" class="form-control" placeholder="Cód de prod.">
+                <input id="date" wire:model.live="codigo" type="number" class="form-control" placeholder="Cód de prod.">
 
             </div>
             <div class="form-group col-md-5">
 
                 <label for="nombre">Filtrar por nombre</label>
-                <input id="nombre" wire:model="nombre" type="text" class="form-control"
+                <input id="nombre" wire:model.live="nombre" type="text" class="form-control"
                     placeholder="Buscar por nombre">
             </div>
             {{-- Cant por página --}}
             <div class="form-group col-md-2">
                 <label for="perPage">Cant. por página</label>
-                <select wire:model="cantPagina" class="form-control" id="perPage">
+                <select wire:model.live="cantPagina" class="form-control" id="perPage">
                     <option value="5">5</option>
                     <option selected value="10">10</option>
                     <option value="15">15</option>
@@ -28,7 +28,7 @@
             {{-- Select catalogo --}}
             <div class="form-group col-md-3">
                 <label for="catalogo">Filtrar por catálogo</label>
-                <select wire:model="catalogo_id" class="form-control" id="catalogo">
+                <select wire:model.live="catalogo_id" class="form-control" id="catalogo">
                     <option value="">Todos</option>
                     @foreach ($catalogos as $catalogo)
                         <option value="{{ $catalogo->id }}">{{ $catalogo->nombre }}</option>

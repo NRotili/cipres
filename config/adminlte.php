@@ -267,6 +267,27 @@ return [
             'route'  => 'panel.catalogues.index',
             'icon' => 'fas fa-fw fa-book-open',
         ],
+        ['header' => 'WHATSAPP'],
+        [
+            'text'=> 'Clientes',
+            'url' => '#',
+            'icon' => 'fas fa-fw fa-users',
+        ],
+        [
+            'text'=> 'Pedidos',
+            'url' => '#',
+            'icon' => 'fas fa-fw fa-shopping-cart',
+        ],
+        [
+            'text' => 'Chats',
+            'url'  => '#',
+            'icon' => 'fas fa-fw fa-comments',
+        ],
+        [
+            'text' => 'Mensajes',
+            'url'  => '#',
+            'icon' => 'fas fa-fw fa-envelope',
+        ],
 
         ['header' => 'account_settings'],
         [
@@ -332,6 +353,41 @@ return [
                 ],
             ],
         ],
+        'KrajeeFileinput' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/kartik-v/bootstrap-fileinput/css/fileinput.min.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/kartik-v/bootstrap-fileinput/themes/explorer-fa5/theme.min.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/kartik-v/bootstrap-fileinput/js/fileinput.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/kartik-v/bootstrap-fileinput/themes/fa5/theme.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/kartik-v/bootstrap-fileinput/themes/explorer-fa5/theme.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/kartik-v/bootstrap-fileinput/js/locales/es.js',
+                ],
+            ],
+        ],    
         'BsCustomFileInput' => [
             'active' => false,
             'files' => [
