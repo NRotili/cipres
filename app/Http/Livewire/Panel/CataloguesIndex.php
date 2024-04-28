@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Panel;
+namespace App\Http\Livewire\Panel;
 
 use App\Models\Catalogue;
 use Livewire\Component;
@@ -27,5 +27,6 @@ class CataloguesIndex extends Component
                 ->paginate();
 
         return view('livewire.panel.catalogues-index', compact('catalogues'));
+
     }
 }
