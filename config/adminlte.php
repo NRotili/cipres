@@ -270,7 +270,7 @@ return [
         ['header' => 'WHATSAPP'],
         [
             'text'=> 'Clientes',
-            'url' => '#',
+            'route' => 'panel.wsp.clientes.index',
             'icon' => 'fas fa-fw fa-users',
         ],
         [

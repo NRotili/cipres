@@ -3,6 +3,7 @@
 use App\Http\Controllers\Panel\CatalogueController;
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\ProductController;
+use App\Http\Controllers\Panel\Whatsapp\Clientes\ClienteController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,6 +19,9 @@ Route::get('productos/importar', [ProductController::class, 'importar'])->name('
 
 // --------------- ********  EXCEL ******* --------------- //
 Route::post('productos/importar', [ProductController::class, 'importarproductos'])->name('administracion.productos.importarproductos');
+
+// --------------- ********  WSP ******* --------------- //
+Route::resource('wsp/clientes', ClienteController::class)->names('panel.wsp.clientes');
 
 
 use Illuminate\Support\Facades\Artisan;
