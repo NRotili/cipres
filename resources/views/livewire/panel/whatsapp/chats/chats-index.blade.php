@@ -64,43 +64,50 @@
                             <th>Telefono</th>
                             <th>Tipo de contacto</th>
                             <th>Solicitud</th>
-                            <th>Acciones</th>
+                            <th colspan="2">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         @foreach ($chats as $chat)
                             <tr>
-                                @if($chat->cliente)
-                                <td>{{ $chat->cliente->nombre }}</td>
-                                <td>{{ $chat->cliente->apellido }}</td>
-                                <td>{{ $chat->cliente->telefono }}</td>
+                                @if ($chat->cliente)
+                                    <td>{{ $chat->cliente->nombre }}</td>
+                                    <td>{{ $chat->cliente->apellido }}</td>
+                                    <td>{{ $chat->cliente->telefono }}</td>
                                 @else
-                                <td>SIN REGISTRAR</td>
-                                <td>SIN REGISTRAR</td>
-                                <td>SIN REGISTRAR</td>
+                                    <td>SIN REGISTRAR</td>
+                                    <td>SIN REGISTRAR</td>
+                                    <td>SIN REGISTRAR</td>
                                 @endif
                                 <td>{{ $chat->tipo }}</td>
                                 <td>{{ \Carbon\Carbon::parse($chat->created_at)->format('d/m/Y - H:i') }}</td>
-                                <td>
 
-                                    <a target="_blank" href="https://wa.me/+549{{ $chat->cliente->telefono }}"
-                                        class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top"
-                                        title="Chatear">
-                                        <i class="fab fa-whatsapp"></i>
-                                    </a>
+                                <td width="10px">
+                                    <div class="btn-group">
+                                        @if ($chat->cliente)
+                                            <a target="_blank" href="https://wa.me/+549{{ $chat->cliente->telefono }}"
+                                                class="btn btn-success btn-sm" data-toggle="tooltip"
+                                                data-container=".content" title="Chatear">
+                                                <i class="fab fa-whatsapp"></i>
+                                            </a>
+                                        @endif
 
-                                    {{-- Finalizado --}}
-                                    @if ($chat->status == 1)
-                                        <button wire:click="finalizado({{ $chat->id }})"
-                                            class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
-                                            title="Finalizado">
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                    @endif
+                                        {{-- Finalizado --}}
+                                        @if ($chat->status == 1)
+                                            <button wire:loading.attr="disabled" wire:click="finalizado({{ $chat->id }})"
+                                                class="btn btn-primary btn-sm" data-toggle="tooltip"
+                                                data-container=".content" title="Finalizado">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                        @endif
 
+                                    </div>
 
                                 </td>
+
+
+
                             </tr>
                         @endforeach
 

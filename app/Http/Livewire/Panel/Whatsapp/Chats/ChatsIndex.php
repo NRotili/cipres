@@ -36,4 +36,13 @@ class ChatsIndex extends Component
 
         return view('livewire.panel.whatsapp.chats.chats-index', compact('chats'));
     }
+
+    //finalizado
+    public function finalizado($id){
+        $chat = Chat::find($id);
+        $chat->status = -1;
+        $chat->save();
+
+        $this->render();
+    }
 }
