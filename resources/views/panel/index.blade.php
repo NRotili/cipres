@@ -18,6 +18,18 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <x-adminlte-small-box title="{{ $cantClientes }}" text="CLIENTES" icon="fas fa-users text-dark" theme="teal"
+                url="{{route('panel.wsp.clientes.index')}}" url-text="+ info" />
+        </div>
+        {{-- chats por responder --}}
+        <div class="col-12 col-md-6">
+            <x-adminlte-small-box title="{{ $chats }}" text="CHATS S/RESPONDER" icon="fas fa-comments text-dark" theme="teal"
+                url="{{ route('panel.wsp.chats.index') }}" url-text="+ info" />
+        </div>
+    </div>
+
 
 @stop
 

@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cliente_id')->constrained()->cascadeOnDelete();
+            //Client_id nullable
+            $table->unsignedBigInteger('client_id')->nullable();
+
+            $table->foreign('client_id')->references('id')->on('clientes')->onDelete('set null');
+
             $table->text('tipo');  //Revendedor, Cons. Final, etc
             $table->boolean('status')->default(true);
             $table->timestamps();

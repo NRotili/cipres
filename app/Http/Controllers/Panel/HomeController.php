@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Catalogue;
+use App\Models\Chat;
+use App\Models\Cliente;
 use App\Models\Product;
 use PDF;
 
@@ -14,7 +16,9 @@ class HomeController extends Controller
     {
         $cantProduct=Product::all()->count();
         $cantCata= Catalogue::all()->count();
-        return view('panel.index', compact('cantProduct','cantCata'));
+        $cantClientes = Cliente::all()->count();
+        $chats = Chat::where('status', 1)->count();
+        return view('panel.index', compact('cantProduct','cantCata','cantClientes','chats'));
     }
 
 

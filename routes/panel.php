@@ -3,6 +3,7 @@
 use App\Http\Controllers\Panel\CatalogueController;
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\ProductController;
+use App\Http\Controllers\Panel\Whatsapp\Chats\ChatController;
 use App\Http\Controllers\Panel\Whatsapp\Clientes\ClienteController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,7 @@ Route::post('productos/importar', [ProductController::class, 'importarproductos'
 
 // --------------- ********  WSP ******* --------------- //
 Route::resource('wsp/clientes', ClienteController::class)->names('panel.wsp.clientes');
+Route::get('wsp/chats', [ChatController::class, 'index'])->name('panel.wsp.chats.index');
 
 
 use Illuminate\Support\Facades\Artisan;

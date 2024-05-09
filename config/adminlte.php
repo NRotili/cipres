@@ -280,7 +280,7 @@ return [
         ],
         [
             'text' => 'Chats',
-            'url'  => '#',
+            'route' => 'panel.wsp.chats.index',
             'icon' => 'fas fa-fw fa-comments',
         ],
         [
