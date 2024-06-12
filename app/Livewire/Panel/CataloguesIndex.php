@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Panel;
+namespace App\Livewire\Panel;
 
 use App\Models\Catalogue;
 use Livewire\Component;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Panel\Productos;
+namespace App\Livewire\Panel\Productos;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;

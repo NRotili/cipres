@@ -54,14 +54,22 @@
                     <label for="file">Importar Productos</label>
                     {{-- <x-adminlte-input-file-krajee name="kifBasic"/> --}}
                     {{-- <x-adminlte-input-file wire:model="file"  disable-feedback name="file"/> --}}
-                    {{-- <input type="file" wire:model="file" name="file" id="file"> --}}
-                    <x-adminlte-input-file wire.ignore wire:model.blur="file" name="file" igroup-size="sm" disable-feedback legend="Buscar">
+
+                    <x-adminlte-input-file wire:model.lazy="file" name="file" igroup-size="sm" disable-feedback legend="Buscar">
                         <x-slot name="prependSlot">
                             <div class="input-group-text bg-lightblue">
                                 <i class="fas fa-upload"></i>
                             </div>
                         </x-slot>
                     </x-adminlte-input-file>
+                   
+                    {{-- <x-adminlte-input-file wire.ignore wire:model.blur="file" name="file" igroup-size="sm" disable-feedback legend="Buscar">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text bg-lightblue">
+                                <i class="fas fa-upload"></i>
+                            </div>
+                        </x-slot>
+                    </x-adminlte-input-file> --}}
                 </div>
                 {{-- show errors --}}
                

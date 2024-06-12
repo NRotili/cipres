@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Panel\Whatsapp\Clientes;
+namespace App\Livewire\Panel\Whatsapp\Clientes;
 
 use App\Models\Cliente;
 use Livewire\Component;
