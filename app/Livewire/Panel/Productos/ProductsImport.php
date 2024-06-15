@@ -36,30 +36,10 @@ class ProductsImport extends Component
             'file' => 'required|mimes:xlsx,xls,csv'
         ]);
 
-        //Execute command php artisan backup:run --only-db
-        // try {
-        //     // Artisan::call('backup:run', ['--only-db' => true]);
-
-        //     //mostrar toast 
-        //     toastr()->title('Información')
-        //         ->success('Backup creado correctamente.')
-        //         ->timeOut(2000)
-        //         ->progressBar()
-        //         ->flash();
-        // } catch (\Throwable $th) {
-        //     toastr()->title('Error')
-        //         ->error('Error al crear backup.')
-        //         ->timeOut(2000)
-        //         ->progressBar()
-        //         ->flash();
-        //     return redirect()->route('panel.products.index');
-        // }
 
 
         if ($this->file) {
-            // $path = $request->file->getRealPath();
-            // $path1 = $request->file('mcafile')->store('temp');
-            // $path = storage_path('app') . '/' . $path1;
+    
             $data = Excel::import(new ProductosImport, $this->file);
             if ($data) {
                 toastr()->title('Información')

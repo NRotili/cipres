@@ -267,6 +267,13 @@ return [
             'route'  => 'panel.catalogues.index',
             'icon' => 'fas fa-fw fa-book-open',
         ],
+        [
+            'text' => 'Categorías',
+            'route'  => 'panel.categorias.index',
+            'icon' => 'fas fa-fw fa-list',
+        ],
+
+
         ['header' => 'WHATSAPP'],
         [
             'text'=> 'Clientes',

@@ -3,6 +3,7 @@
 namespace App\Livewire\Panel;
 
 use App\Models\Catalogue;
+use App\Models\Categoria;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,7 +14,7 @@ class ProductsIndex extends Component
     use WithPagination;
     protected $paginationTheme= "bootstrap";
 
-    public $nombre, $codigo, $productoEliminar, $cantPagina, $catalogos, $catalogo_id;
+    public $nombre, $codigo, $productoEliminar, $cantPagina, $categorias, $categoria_id;
 
     public function updatingNombre()
     {
@@ -36,7 +37,7 @@ class ProductsIndex extends Component
     public function mount()
     {
         $this->cantPagina = 10;
-        $this->catalogos = Catalogue::orderBy('nombre', 'asc')->get();
+        $this->categorias = Categoria::orderBy('nombre', 'asc')->get();
 
     }
     
@@ -50,11 +51,8 @@ class ProductsIndex extends Component
         ->when($this->codigo, function($query, $codigo){
             $query->where('codigo_producto','LIKE','%' . $codigo . '%');
         })
-        ->when($this->catalogo_id, function ($query, $catalogo_id) {
-            // Filtrar por catálogo
-            $query->whereHas('catalogues', function ($query) use ($catalogo_id) {
-                $query->where('catalogue_id', $catalogo_id);
-            });
+        ->when($this->categoria_id, function($query, $categoria_id){
+            $query->where('categoria_id', $categoria_id);
         })
         ->orderBy('nombre', 'asc')
         ->paginate($this->cantPagina);

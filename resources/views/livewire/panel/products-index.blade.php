@@ -29,11 +29,11 @@
             </div>
             {{-- Select catalogo --}}
             <div class="form-group col-md-3">
-                <label for="catalogo">Filtrar por catálogo</label>
-                <select wire:model.live="catalogo_id" class="form-control" id="catalogo">
+                <label for="categoria">Filtrar por categoría</label>
+                <select wire:model.live="categoria_id" class="form-control" id="categoria">
                     <option value="">Todos</option>
-                    @foreach ($catalogos as $catalogo)
-                        <option value="{{ $catalogo->id }}">{{ $catalogo->nombre }}</option>
+                    @foreach ($categorias as $categoria)
+                        <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
                     @endforeach
                 </select>
             </div>

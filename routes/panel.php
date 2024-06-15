@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Panel\CatalogueController;
+use App\Http\Controllers\Panel\CategoriaController;
 use App\Http\Controllers\Panel\HomeController;
 use App\Http\Controllers\Panel\ProductController;
 use App\Http\Controllers\Panel\Whatsapp\Chats\ChatController;
@@ -15,6 +16,7 @@ Route::get('createcatalogue', [HomeController::class, 'catalogue'])->name('panel
 
 Route::resource('products', ProductController::class)->names('panel.products');
 Route::resource('catalogues', CatalogueController::class)->names('panel.catalogues');
+Route::resource('categorias', CategoriaController::class)->names('panel.categorias');
 
 Route::get('productos/importar', [ProductController::class, 'importar'])->name('panel.productos.importar');
 

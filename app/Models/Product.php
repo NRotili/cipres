@@ -11,10 +11,16 @@ class Product extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    //Relación muchos a muchos
-    public function catalogues()
+    // //Relación muchos a muchos
+    // public function catalogues()
+    // {
+    //     return $this->belongsToMany(Catalogue::class);
+    // }
+
+    //Cateegoria
+    public function category()
     {
-        return $this->belongsToMany(Catalogue::class);
+        return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 
     //Relación uno a uno polimórfica

@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware(['auth:sanctum'])->get('/', [HomeController::class, 'index'])->name('panel.index');
+Route::middleware(['auth:sanctum'])->get('/', [HomeController::class, 'index']);
 
-Route::get('catalogo/{tipo}/{catalogue}', [HomeController::class, 'catalogue'])->name('panel.createcatalogue');
+Route::get('catalogo/{tipo}/{catalogue?}', [HomeController::class, 'catalogue']);
 
 

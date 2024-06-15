@@ -11,9 +11,11 @@ class Catalogue extends Model
 
     protected $guarded = ['id','created_at', 'updated_at'];
 
-    //Relación muchos a muchos
-    public function products()
+
+    //categorias
+    public function categorias()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Categoria::class);
     }
+
 }

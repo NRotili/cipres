@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Catalogue;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class CatalogueController extends Controller
@@ -25,7 +26,8 @@ class CatalogueController extends Controller
      */
     public function create()
     {
-        return view('panel.catalogos.create');
+        $categorias = Categoria::all();
+        return view('panel.catalogos.create', compact('categorias'));
     }
 
     /**
@@ -40,7 +42,11 @@ class CatalogueController extends Controller
             'nombre' => 'required'
         ]);
 
-        Catalogue::create($request->all());
+        $catalogo = Catalogue::create($request->all());
+
+        if ($request->categorias) {
+            $catalogo->categorias()->attach($request->categorias);
+        }
 
         return redirect()->route('panel.catalogues.index')->with('info', 'El catálogo se creó con éxito');
 
@@ -66,7 +72,8 @@ class CatalogueController extends Controller
      */
     public function edit(Catalogue $catalogue)
     {
-        return view('panel.catalogos.edit', compact('catalogue'));
+        $categorias = Categoria::all();
+        return view('panel.catalogos.edit', compact('catalogue', 'categorias'));
     }
 
     /**
@@ -82,6 +89,7 @@ class CatalogueController extends Controller
             'nombre'=>'required'
         ]);
         $catalogue->update($request->all());
+        $catalogue->categorias()->sync($request->categorias);
         return redirect()->route('panel.catalogues.index')->with('info','Catálogo editado correctamente');
 
 

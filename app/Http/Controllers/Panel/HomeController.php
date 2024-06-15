@@ -22,18 +22,14 @@ class HomeController extends Controller
     }
 
 
-    public function catalogue($tipo, $catalogue)
+    public function catalogue($tipo, $catalogue = null)
     {
-
-        // $data = [
-        //     'titulo' => 'Styde.net'
-        // ];
 
         // if(!empty($catalogue)){
         //     // $catalog = Catalogue::find(1)
         //                 // ->get();
 
-        //     $catalog = Catalogue::where('nombre', $catalogue)->get(); 
+        //     $catalog = Catalogue::where('nombre', $catalogue)->get();
         //     foreach ($catalog as $item) {
         //         $id = $item->id;
         //     }
@@ -42,15 +38,19 @@ class HomeController extends Controller
         //     $products = Catalogue::find($id)->products()->orderBy('nombre')->get();
 
         //     // $products = Product::all()->catalogues($cataloguemodel->id);
-            
+
         //     return view('panel.catalogue2', compact('products', 'catalogue'));
         // } else {
         //     $products = Product::orderBy('nombre')->get();
         //     $catalogue = "Catálogo";
         //     return view('panel.catalogue2', compact('products','catalogue'));
-        // }  
+        // }
 
-        Catalogue::where('nombre', $catalogue)->firstOrFail();
+        if(!empty($catalogue)) {
+            Catalogue::where('nombre', $catalogue)->firstOrFail();
+        } else {
+            $catalogue = "Catálogo";
+        }
 
         if ($tipo != 'revendedor' && $tipo != 'consfinal') {
             //return 404

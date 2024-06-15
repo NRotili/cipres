@@ -20,18 +20,20 @@ class CataloguesIndex extends Component
     public function render()
     {
 
-        $catalog = Catalogue::where('nombre', $this->catalogue)
-            ->first();
+        if ($this->catalogue == 'Catálogo') {
+            $catalogueId = 0;
+        } else {
+            $catalog = Catalogue::where('nombre', $this->catalogue)
+                ->first();
+            $catalogueId = $catalog->id;
+        }
+
+        if ($this->tipo == 'revendedor' || $this->tipo == 'consfinal') {
 
 
-        if ($this->tipo == 'revendedor') {
-            $products = Catalogue::find($catalog->id)->products()
-                ->where('nombre', 'LIKE', '%' . $this->search . '%')
-                ->where('estado', 1)
-                ->orderBy('nombre')
-                ->get();
-        } elseif ($this->tipo == 'consfinal') {
-            $products = Catalogue::find($catalog->id)->products()
+            $products = Product::whereHas('category.catalogues', function ($query) use ($catalogueId) {
+                $query->where('catalogue_id', $catalogueId);
+            })
                 ->where('nombre', 'LIKE', '%' . $this->search . '%')
                 ->where('estado', 1)
                 ->orderBy('nombre')
@@ -39,9 +41,7 @@ class CataloguesIndex extends Component
         } else {
             abort(404);
         }
-        
+
         return view('livewire.catalogues-index', compact('products'));
-
-
     }
 }

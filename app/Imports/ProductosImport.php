@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Categoria;
 use App\Models\Product;
+use Error;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -25,6 +26,8 @@ class ProductosImport implements ToCollection, WithHeadingRow
                 if ($row['nombreproducto'] == null || $row['precioventa2'] == null || $row['precioventa3'] == null || $row['codigoproducto'] == null || $row['nombrerubro'] == null) {
                     continue;
                 }
+
+                Log::info('Producto encontrado: ' . $producto->nombre);
 
                 //If categoria exist in table categorias, get id, else create new categoria and get id.
                 $categoria = $categorias->where('nombre', $row['nombrerubro'])->first();
