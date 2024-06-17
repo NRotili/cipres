@@ -54,22 +54,6 @@
     </div> --}}
 </div>
 
-<div class="form-group">
-    <p class="font-weight-bold">Catálogos</p>
-
-    @foreach ($catalogues as $catalogue)
-        <label class="mr-3">
-            {!! Form::checkbox('catalogues[]', $catalogue->id, null) !!}
-            {{ $catalogue->nombre }}
-        </label>
-    @endforeach
-
-
-    @error('catalogues')
-        <br>
-        <small class="text-danger">{{ $message }}</small>
-    @enderror
-</div>
 
 
 <div class="row mb-3">

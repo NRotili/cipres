@@ -14,6 +14,7 @@ class CataloguesIndex extends Component
 
     public $search;
     public $catalogue;
+    public $catalogoWeb;
     public $tipo;
 
 
@@ -23,6 +24,8 @@ class CataloguesIndex extends Component
         if ($this->catalogue == 'Catálogo') {
             $catalogueId = 0;
         } else {
+            $this->catalogoWeb = Catalogue::where('nombre', $this->catalogue)
+                ->first();
             $catalog = Catalogue::where('nombre', $this->catalogue)
                 ->first();
             $catalogueId = $catalog->id;

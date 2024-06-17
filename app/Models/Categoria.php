@@ -11,8 +11,15 @@ class Categoria extends Model
 
     protected $fillable = ['nombre'];
 
+    public function productosPublicados()
+    {
+        //Only return productos with estado = 1
+        return $this->hasMany(Product::class)->where('estado', 1);
+    }
+
     public function productos()
     {
+        //Only return productos with estado = 1
         return $this->hasMany(Product::class);
     }
 

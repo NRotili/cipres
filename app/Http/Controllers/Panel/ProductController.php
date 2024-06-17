@@ -45,9 +45,7 @@ class ProductController extends Controller
             ]);
         }
 
-        if ($request->catalogues) {
-            $product->catalogues()->attach($request->catalogues);
-        }
+    
 
 
         return redirect()->route('panel.products.index', $product)->with('info', 'El producto se creó con éxito');
@@ -89,7 +87,6 @@ class ProductController extends Controller
                 ]);
             }
         }
-        $product->catalogues()->sync($request->catalogues);
 
         return redirect()->route('panel.products.index', $product)->with('info', 'El producto se actualizó con éxito');
     }
