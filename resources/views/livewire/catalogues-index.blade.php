@@ -109,52 +109,58 @@
                     @continue
                 @endif
                 <div class="row">
-                    <div class="col col-md-1 col-sm-0 col-0"></div>
+                    <div class="col col-md-1 col-sm-0 col-0">
+
+                    </div>
                     <div class="col col-md-10 col-sm-12 col-12">
                         <div class="card mt-10 md:mt-10">
                             <div class="card-header">
                                 <h2 class="text-2xl font-bold text-center">{{ $categoria->nombre }}</h2>
-                            </div>  
+                            </div>
                             <div class="card-body">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-left">PRODUCTO</th>
-                                            <th class="text-left md:text-center">PRECIO</th>
-                                            <th class="text-left md:text-center">FOTO</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach ($categoria->productosPublicados as $producto)
-                                        <tr>
-                                            <td class="align-middle">
-                                                <span class="text-sm d-inline-block text-truncate font-bold">{{ $producto->nombre }}</span>
-                                            </td>
-                                            <td class="align-middle text-left md:text-center">
-                                                @if ($tipo == 'revendedor')
-                                                <p class="text-sm sm:text-truncate text-gray-500"> ${{$producto->precioventa2}}</p>
-                                                @elseif($tipo == 'consfinal')
-                                                <p class="text-sm sm:text-truncate text-gray-500"> ${{$producto->precioventa3}}</p>
-                                                @endif
-                                                    
-                                            </td>
-                                            <td class="text-left md:text-center">
-                                                <img src="@if ($producto->image) {{ Storage::url($producto->image->url) }} @else {{ asset('img/nodisponible.jpg') }} @endif"
-                                                    alt="CIPRES"
-                                                    class="w-auto h-10 object-cover lg:object-cover  lg:h-20 rounded-2xl">
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">PRODUCTO</th>
+                                                <th class="text-left md:text-center">PRECIO</th>
+                                                <th class="text-left md:text-center">FOTO</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($categoria->productosPublicados as $producto)
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <span class="text-sm font-bold">{{ $producto->nombre }}</span>
+                                                    </td>
+                                                    <td class="align-middle text-left md:text-center">
+                                                        @if ($tipo == 'revendedor')
+                                                            <p class="text-sm sm:text-truncate text-gray-500">
+                                                                ${{ $producto->precioventa2 }}</p>
+                                                        @elseif($tipo == 'consfinal')
+                                                            <p class="text-sm sm:text-truncate text-gray-500">
+                                                                ${{ $producto->precioventa3 }}</p>
+                                                        @endif
 
+                                                    </td>
+                                                    <td class="text-left md:text-center">
+                                                        <img src="@if ($producto->image) {{ Storage::url($producto->image->url) }} @else {{ asset('img/nodisponible.jpg') }} @endif"
+                                                            alt="CIPRES"
+                                                            class="w-auto h-10 object-cover lg:object-cover  lg:h-20 rounded-2xl">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col col-md-1 col-sm-0 col-0"></div>
+                    
                 </div>
             @endforeach
         </div>
+
     </main>
 
     <footer>
