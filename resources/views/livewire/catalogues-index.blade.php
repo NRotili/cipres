@@ -123,7 +123,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">PRODUCTO</th>
-                                                <th class="text-left md:text-center">PRECIO</th>
+                                                <th>PRECIO</th>
                                                 <th class="text-left md:text-center">FOTO</th>
                                             </tr>
                                         </thead>
