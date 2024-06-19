@@ -144,9 +144,13 @@
 
                                                     </td>
                                                     <td class="text-left md:text-center">
-                                                        <img src="@if ($producto->image) {{ Storage::url($producto->image->url) }} @else {{ asset('img/nodisponible.jpg') }} @endif"
+                                                        {{-- <img src="@if ($producto->image) {{ Storage::url($producto->image->url) }} @else {{ asset('img/nodisponible.jpg') }} @endif"
                                                             alt="CIPRES"
-                                                            class="w-auto h-10 object-cover lg:object-cover  lg:h-20 rounded-2xl">
+                                                            class="w-auto h-10 object-cover lg:object-cover  lg:h-20 rounded-2xl"> --}}
+                                                            {{-- Button with camera  --}}
+                                                            <button type="button" class="btn btn-xs btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                <i class="fas fa-camera"></i>
+                                                            </button>
                                                     </td>
                                                 </tr>
                                             @endforeach

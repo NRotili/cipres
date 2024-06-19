@@ -33,6 +33,13 @@
             max-width: 150px; /* Adjust this value as needed */
             font-size: 0.65rem;
         }
+
+        .btn-xs {
+            padding: 0.25rem 0.5rem; /* Smaller padding */
+            font-size: 0.75rem; /* Smaller font size */
+            line-height: 1; /* Adjust line height */
+            border-radius: 0.2rem; /* Adjust border radius */
+        }
     </style>
 
 
