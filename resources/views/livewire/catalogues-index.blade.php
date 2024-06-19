@@ -131,7 +131,7 @@
                                             @foreach ($categoria->productosPublicados as $producto)
                                                 <tr>
                                                     <td class="align-middle">
-                                                        <span class="text-sm font-bold">{{ $producto->nombre }}</span>
+                                                        <span class="name-column text-sm font-bold">{{ $producto->nombre }}</span>
                                                     </td>
                                                     <td class="align-middle text-left md:text-center">
                                                         @if ($tipo == 'revendedor')

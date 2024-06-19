@@ -20,7 +20,16 @@
 
 
 
-    
+    <style>
+        .table tbody tr td {
+            padding: 0.1rem 0.5rem; /* Reduce the padding */
+        }
+        .name-column {
+            white-space: nowrap; /* Prevent line breaks */
+            overflow-x: auto; /* Enable horizontal scroll */
+            max-width: 150px; /* Adjust this value as needed */
+        }
+    </style>
 
 
 </head>
