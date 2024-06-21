@@ -75,30 +75,41 @@
 
 <body class="bg-cover bg-no-repeat bg-center bg-fixed " style="background-image: url({{ asset('img/bg.jpg') }})">
 
-    
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+    <script>
+         document.addEventListener('DOMContentLoaded', function () {
+        let modal = null;
+
+        window.addEventListener('show-modal', function () {
+            const modalElement = document.getElementById('photoModal');
+            modal = new mdb.Modal(modalElement);
+            modal.show();
+        });
+
+        const modalElement = document.getElementById('photoModal');
+        modalElement.addEventListener('hidden.mdb.modal', function () {
+            // Ocultar y destruir el modal
+            if (modal) {
+                modal.hide();
+                modal.dispose();
+            }
+
+            // Eliminar backdrops residuales
+            document.querySelectorAll('.modal-backdrop').forEach(function (backdrop) {
+                backdrop.remove();
+            });
+
+            // Asegurar que el scroll vertical esté habilitado
+            document.body.style.overflowY = 'auto';
+        });
+    });
+    </script>
     <script src="{{ mix('js/app.js') }}"></script>
     @livewireScripts
     @livewire('catalogues-index', ['catalogue' => $catalogue, 'tipo' => $tipo])
 
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            window.addEventListener('show-modal', function() {
-                const modalElement = document.getElementById('photoModal');
-                const modal = new mdb.Modal(modalElement);
-                modal.show();
-            });
-
-            const modalElement = document.getElementById('photoModal');
-            modalElement.addEventListener('hidden.mdb.modal', function() {
-                document.querySelectorAll('.modal-backdrop').forEach(function(backdrop) {
-                    backdrop.remove();
-                });
-            });
-        });
-    </script>
 
 </body>
 
