@@ -61,6 +61,13 @@
         .footer-space {
             margin-bottom: 100px;
         }
+
+        .modal-img {
+            width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
     </style>
 
 
@@ -75,6 +82,13 @@
                 const modalElement = document.getElementById('photoModal');
                 const modal = new mdb.Modal(modalElement);
                 modal.show();
+            });
+
+            const modalElement = document.getElementById('photoModal');
+            modalElement.addEventListener('hidden.mdb.modal', function() {
+                document.querySelectorAll('.modal-backdrop').forEach(function(backdrop) {
+                    backdrop.remove();
+                });
             });
         });
     </script>

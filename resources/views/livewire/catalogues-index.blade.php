@@ -130,7 +130,7 @@
                 </div>
                 <div class="modal-body">
                     @if ($foto_url)
-                        <img src="{{ $foto_url }}" class="img-fluid" alt="Foto del Producto">
+                        <img class="modal-img" src="{{ $foto_url }}" class="img-fluid" alt="Foto del Producto">
                     @endif
                 </div>
             </div>
