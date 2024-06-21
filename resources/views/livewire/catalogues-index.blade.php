@@ -52,11 +52,7 @@
                 @if ($categoria->productos->count() == 0)
                     @continue
                 @endif
-                <div class="row">
-                    <div class="col col-md-1 col-sm-0 col-0">
-
-                    </div>
-                    <div class="col col-md-10 col-sm-12 col-12">
+                    <div class="col col-md-10 col-12">
                         <div class="card mt-10 md:mt-10">
                             <div class="card-header">
                                 <h2 class="text-2xl font-bold text-center">{{ $categoria->nombre }}</h2>
@@ -105,8 +101,6 @@
                             </div>
                         </div>
                     </div>
-
-                </div>
             @endforeach
         </div>
 

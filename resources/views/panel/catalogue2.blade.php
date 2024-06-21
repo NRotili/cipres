@@ -75,6 +75,13 @@
 
 <body class="bg-cover bg-no-repeat bg-center bg-fixed " style="background-image: url({{ asset('img/bg.jpg') }})">
 
+    
+
+    <script src="{{ mix('js/app.js') }}"></script>
+    @livewireScripts
+    @livewire('catalogues-index', ['catalogue' => $catalogue, 'tipo' => $tipo])
+
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -92,10 +99,6 @@
             });
         });
     </script>
-
-    <script src="{{ mix('js/app.js') }}"></script>
-    @livewireScripts
-    @livewire('catalogues-index', ['catalogue' => $catalogue, 'tipo' => $tipo])
 
 </body>
 
