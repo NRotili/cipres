@@ -45,63 +45,7 @@
 
     </header>
     <!--Main Navigation-->
-    <main class="">
-
-        {{-- <div class="pt-44 md:pt-20">
-            <div class="grid px-2 gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-                @foreach ($products as $product)
-                    <div class="flex-auto flex-col">
-                        <div class="flex-auto bg-white shadow-md  rounded-3xl p-4">
-                            <div class="flex">
-                                <div class=" h-auto w-auto lg:h-40 lg:w-40   lg:mb-0 mb-3">
-                                    <img src="@if ($product->image) {{ Storage::url($product->image->url) }} @else {{ asset('img/nodisponible.jpg') }} @endif"
-                                        alt="CIPRES"
-                                        class="w-auto h-40 object-cover lg:object-cover  lg:h-40 rounded-2xl">
-                                </div>
-                                <div class="flex-auto ml-3 justify-evenly py-2">
-                                    <div class="flex flex-wrap ">
-
-                                        <h2 class="flex-auto text-lg font-medium">{{ $product->nombre }}</h2>
-                                    </div>
-                                    <p class="mt-3"></p>
-
-                                    <div class="flex pt-2 pb-2 border-t border-gray-200 "></div>
-
-                                    <div class="h-auto">
-                                        <div class="flex text-sm text-gray-500">
-                                            <div class="flex-1 inline-flex items-center">
-                                                <p class="">Costo</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex pb-4 pt-1 text-sm text-gray-500">
-                                            <div class="flex-1 inline-flex items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="h-5 w-5 mr-1 text-gray-400" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                </svg>
-
-                                                <p class="">
-                                                    @if ($tipo == 'revendedor')
-                                                        {{ $product->precioventa2 }}
-                                                    @elseif($tipo == 'consfinal')
-                                                        {{ $product->precioventa3 }}
-                                                    @endif
-                                                <p>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div> --}}
+    <main class="footer-space">
 
         <div class="pt-44 md:pt-20 z-0">
             @foreach ($catalogoWeb->categorias as $categoria)
@@ -131,7 +75,8 @@
                                             @foreach ($categoria->productosPublicados as $producto)
                                                 <tr>
                                                     <td class="align-middle">
-                                                        <span class="name-column text-sm font-bold">{{ $producto->nombre }}</span>
+                                                        <span
+                                                            class="name-column text-sm font-bold">{{ $producto->nombre }}</span>
                                                     </td>
                                                     <td class="align-middle text-center">
                                                         @if ($tipo == 'revendedor')
@@ -144,13 +89,13 @@
 
                                                     </td>
                                                     <td class="text-center">
-                                                        {{-- <img src="@if ($producto->image) {{ Storage::url($producto->image->url) }} @else {{ asset('img/nodisponible.jpg') }} @endif"
-                                                            alt="CIPRES"
-                                                            class="w-auto h-10 object-cover lg:object-cover  lg:h-20 rounded-2xl"> --}}
-                                                            {{-- Button with camera  --}}
-                                                            <button type="button" class="btn btn-xs btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                <i class="fas fa-camera"></i>
-                                                            </button>
+
+                                                        <button type="button" class="btn btn-xs btn-primary"
+                                                            data-mdb-ripple-init data-mdb-modal-init
+                                                            data-mdb-target="#photoModal"
+                                                            wire:click="showModal('{{ $producto->id }}')">
+                                                            <i class="fas fa-camera"></i>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -160,7 +105,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             @endforeach
         </div>
@@ -172,4 +117,23 @@
             <p>Precios sujetos a modificación sin previo aviso.</p>
         </div>
     </footer>
+
+    <!-- Modal -->
+    <div wire:ignore.self class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="photoModalLabel">Foto del Producto</h5>
+                    <button type="button" class="btn-close" data-mdb-ripple-init data-mdb-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @if ($foto_url)
+                        <img src="{{ $foto_url }}" class="img-fluid" alt="Foto del Producto">
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

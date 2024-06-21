@@ -6,6 +6,7 @@ use App\Models\Catalogue;
 use App\Models\Product;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Barryvdh\Debugbar\Twig\Extension\Debug;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class CataloguesIndex extends Component
@@ -16,6 +17,22 @@ class CataloguesIndex extends Component
     public $catalogue;
     public $catalogoWeb;
     public $tipo;
+    public $foto_url;
+
+    protected $listeners = ['showModal'];
+
+    public function showModal($id)
+    {
+
+        $product = Product::find($id);
+        if ($product->image) {
+            $this->foto_url = Storage::url($product->image->url);
+        } else {
+            // use asset img/nodisponible.jpg
+            $this->foto_url = asset('img/nodisponible.jpg');
+        }      
+        $this->dispatch('show-modal');
+    }
 
 
     public function render()
