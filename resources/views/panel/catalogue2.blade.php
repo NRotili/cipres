@@ -22,16 +22,24 @@
 
     <style>
         .table tbody tr td {
-            padding-top: 0px; /* Reduce the padding */
-            padding-bottom: 0px; /* Reduce the padding */
-            padding-right: 0px;
+            vertical-align: middle;
+            padding: 0px;
+        }
+
+        .text-center {
+            text-align: center;
         }
         
         .name-column {
-            white-space: nowrap; /* Prevent line breaks */
-            overflow-x: auto; /* Enable horizontal scroll */
+            word-break: break-word; /* Break long words */
+            text-align: left;
             max-width: 150px; /* Adjust this value as needed */
             font-size: 0.65rem;
+        }
+
+        .name-column span {
+            display: block;
+            line-height: 1;
         }
 
         .btn-xs {

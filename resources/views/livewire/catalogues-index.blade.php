@@ -123,8 +123,8 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">PRODUCTO</th>
-                                                <th>PRECIO</th>
-                                                <th class="text-left md:text-center">FOTO</th>
+                                                <th class="text-center">PRECIO</th>
+                                                <th class="text-center">FOTO</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -133,7 +133,7 @@
                                                     <td class="align-middle">
                                                         <span class="name-column text-sm font-bold">{{ $producto->nombre }}</span>
                                                     </td>
-                                                    <td class="align-middle text-left md:text-center">
+                                                    <td class="align-middle text-center">
                                                         @if ($tipo == 'revendedor')
                                                             <p class="text-sm sm:text-truncate text-gray-500">
                                                                 ${{ $producto->precioventa2 }}</p>
@@ -143,7 +143,7 @@
                                                         @endif
 
                                                     </td>
-                                                    <td class="text-left md:text-center">
+                                                    <td class="text-center">
                                                         {{-- <img src="@if ($producto->image) {{ Storage::url($producto->image->url) }} @else {{ asset('img/nodisponible.jpg') }} @endif"
                                                             alt="CIPRES"
                                                             class="w-auto h-10 object-cover lg:object-cover  lg:h-20 rounded-2xl"> --}}

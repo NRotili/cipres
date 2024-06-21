@@ -18,6 +18,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->get('/', [HomeController::class, 'index']);
 
-Route::get('catalogo/{tipo}/{catalogue?}', [HomeController::class, 'catalogue']);
+Route::get('catalogo/{tipo}/{catalogue}', [HomeController::class, 'catalogue']);
 
 
