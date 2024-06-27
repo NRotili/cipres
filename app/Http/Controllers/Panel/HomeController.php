@@ -21,7 +21,6 @@ class HomeController extends Controller
         return view('panel.index', compact('cantProduct','cantCata','cantClientes','chats'));
     }
 
-
     public function catalogue($tipo, $catalogue = null)
     {
 

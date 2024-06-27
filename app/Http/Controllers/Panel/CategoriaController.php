@@ -14,8 +14,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::orderBy('nombre', 'asc')->get();
-        return view('panel.categorias.index', compact('categorias'));
+        return view('panel.categorias.index');
     }
 
     /**

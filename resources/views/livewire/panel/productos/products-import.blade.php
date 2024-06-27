@@ -27,6 +27,9 @@
                         <li>
                             <p><strong>codigoproducto</strong> - </p>
                         </li>
+                        <li>
+                            <p><strong>nombrerubro</strong> - </p>
+                        </li>
 
                     </ul>
                     <li>Una vez completado el archivo, haga click en el botón "Importar".</li>

@@ -35,7 +35,8 @@ class ProductosImport implements ToCollection, WithHeadingRow
                     $categoria_id = $categoria->id;
                 } else {
                     $categoria = Categoria::create([
-                        'nombre' => $row['nombrerubro']
+                        'nombre' => $row['nombrerubro'],
+                        'descripcion' => $row['nombrerubro']
                     ]);
                     $categoria_id = $categoria->id;
                     $categorias = Categoria::all();
@@ -62,7 +63,8 @@ class ProductosImport implements ToCollection, WithHeadingRow
                     $categoria_id = $categoria->id;
                 } else {
                     $categoria = Categoria::create([
-                        'nombre' => $row['nombrerubro']
+                        'nombre' => $row['nombrerubro'],
+                        'descripcion' => $row['nombrerubro']
                     ]);
                     $categoria_id = $categoria->id;
                     $categorias = Categoria::all();
