@@ -3,6 +3,8 @@
 namespace App\Livewire\Panel\Categorias;
 
 use App\Models\Categoria;
+use Illuminate\Support\Facades\Log;
+
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,18 +15,32 @@ class CategoriasIndex extends Component
     protected $categorias;
     protected $paginationTheme= "bootstrap";
 
-    public $categoriaModal;
+    public $categoriaModal ;
+    public $descripcion;
 
     public function editCategoria(Categoria $categoria)
     {
         $this->categoriaModal = $categoria;
+        $this->descripcion = $categoria->descripcion;
     }
 
     //mount
     public function mount()
     {
+        
         $this->categoriaModal = Categoria::first();
         $this->categorias = Categoria::orderBy('nombre', 'asc')->paginate(10);
+    }
+
+    public function updateCategoria()
+    {
+
+        $this->categoriaModal->descripcion = $this->descripcion;
+        $this->categoriaModal->save();
+
+        $this->render();
+
+        
     }
 
     

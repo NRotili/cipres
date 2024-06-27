@@ -17,8 +17,8 @@
                         <tbody>
                             @foreach ($categorias as $categoria)
                                 <tr>
-                                    <td>{{ $categoria->descripcion }}</td>
                                     <td>{{ $categoria->nombre }}</td>
+                                    <td>{{ $categoria->descripcion }}</td>
                                     <td>{{ $categoria->productos->count() }}</td>
                                     <td>{{ $categoria->productos->where('estado', 1)->count() }}</td>
                                     {{-- Show categorie --}}
@@ -60,18 +60,27 @@
 
     {{-- Modal para editar --}}
 
-    <x-adminlte-modal wire:ignore.self id="modalCategoria" title="Nombre: {{ $categoriaModal->nombre }}">
+    <x-adminlte-modal wire:ignore.self id="modalCategoria" title="Nombre:  {{  $categoriaModal->nombre }}">
         <div>
             <div class="row">
 
                 <div class="col-md-12">
-                    <x-adminlte-input name="categoriaModal.descripcion" label="Descripción" placeholder="Descripción"
-                        wire:model.defer="categoriaModal.descripcion" />
+                    <div class="form-group
+                    ">
+                        <label for="descripcion">Descripción</label>
+                        <input type="text" wire:model.defer="descripcion" class="form-control" id="descripcion">
+                       
+
                 </div>
              
                
             </div>
             
         </div>
+        <x-slot name="footerSlot">
+            <x-adminlte-button class="mr-auto" wire:click="updateCategoria()" data-dismiss="modal" theme="success" label="Actualizar"/>
+            <x-adminlte-button theme="danger" label="Cerrar" data-dismiss="modal"/>
+        </x-slot>
     </x-adminlte-modal>
 </div>
+

@@ -55,7 +55,7 @@
                     <div class="col col-md-10 col-12">
                         <div class="card mt-10 md:mt-10">
                             <div class="card-header">
-                                <h2 class="text-2xl font-bold text-center">{{ $categoria->nombre }}</h2>
+                                <h2 class="text-2xl font-bold text-center">{{ $categoria->descripcion }}</h2>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
