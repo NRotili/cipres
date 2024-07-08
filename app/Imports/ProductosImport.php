@@ -15,33 +15,35 @@ class ProductosImport implements ToCollection, WithHeadingRow
     public function collection(Collection $rows)
     {
         $categorias = Categoria::all();
+        $productos = Product::all();
 
         foreach ($rows as $row){
         
-            //Validate if product exist in table productos with codigo.
-            $producto = Product::where('codigo_producto', $row['codigoproducto'])->first();
+            //Valido si existe el producto en la base de datos
+            $producto = $productos->where('codigo_producto', $row['codigoproducto'])->first();
+            //Si existe el producto, actualizo los datos
             if ($producto) {
-
-                //If someone atributte is null, next producto
-                if ($row['nombreproducto'] == null || $row['precioventa2'] == null || $row['precioventa3'] == null || $row['codigoproducto'] == null || $row['nombrerubro'] == null) {
+                //Si alguno de los campos es nulo, no actualizo el producto
+                if ($row['nombreproducto'] == null || $row['precioventa2'] == null || $row['precioventa3'] == null || $row['codigoproducto'] == null) {
                     continue;
                 }
 
-                Log::info('Producto encontrado: ' . $producto->nombre);
-
-                //If categoria exist in table categorias, get id, else create new categoria and get id.
-                $categoria = $categorias->where('nombre', $row['nombrerubro'])->first();
+                //Si categoria existe en tabla categorias, obtengo id, sino creo nueva categoria y obtengo id.
+                $categoria = $categorias->where('nombre', $row['nombresubrubro'])->first();
                 if ($categoria) {
                     $categoria_id = $categoria->id;
-                } else {
+                } elseif (!$row['nombresubrubro'] == null) {
                     $categoria = Categoria::create([
-                        'nombre' => $row['nombrerubro'],
-                        'descripcion' => $row['nombrerubro']
+                        'nombre' => $row['nombresubrubro'],
+                        'descripcion' => $row['nombresubrubro']
                     ]);
                     $categoria_id = $categoria->id;
                     $categorias = Categoria::all();
+                } else {
+                    $categoria_id = null;
                 }
 
+                //Actualizo producto
                 $producto->update([
                     'nombre' => $row['nombreproducto'],
                     'precioventa3' => (float)$row['precioventa3'],
@@ -49,29 +51,28 @@ class ProductosImport implements ToCollection, WithHeadingRow
                     'categoria_id' => $categoria_id,
                 ]);
 
-                Log::info('Producto actualizado: ' . $producto->nombre);
-
 
             } else {
 
-                if ($row['nombreproducto'] == null || $row['precioventa2'] == null || $row['precioventa3'] == null || $row['codigoproducto'] == null || $row['nombrerubro'] == null) {
+                if ($row['nombreproducto'] == null || $row['precioventa2'] == null || $row['precioventa3'] == null || $row['codigoproducto'] == null) {
                     continue;
                 }
 
-                $categoria = $categorias->where('nombre', $row['nombrerubro'])->first();
+                $categoria = $categorias->where('nombre', $row['nombresubrubro'])->first();
                 if ($categoria) {
                     $categoria_id = $categoria->id;
-                } else {
+                } elseif (!$row['nombresubrubro'] == null) {
                     $categoria = Categoria::create([
-                        'nombre' => $row['nombrerubro'],
-                        'descripcion' => $row['nombrerubro']
+                        'nombre' => $row['nombresubrubro'],
+                        'descripcion' => $row['nombresubrubro']
                     ]);
                     $categoria_id = $categoria->id;
                     $categorias = Categoria::all();
-
+                } else {
+                    $categoria_id = null;
                 }
 
-                
+                //Creo producto
                 Product::create([
                     'nombre' => $row['nombreproducto'],
                     'precioventa3' => (float)$row['precioventa3'],
@@ -81,7 +82,6 @@ class ProductosImport implements ToCollection, WithHeadingRow
                     'estado' => '0'
                 ]);
 
-                Log::info('Producto creado: ' . $row['nombreproducto']);
             }
         }
     }
