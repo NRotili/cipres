@@ -86,7 +86,7 @@
                                 <td width="10px">
                                     <div class="btn-group">
                                         @if ($chat->telefonoAdicional)
-                                            <a target="_blank" href="https://wa.me/+549{{ $chat->cliente->telefono }}"
+                                            <a target="_blank" href="https://wa.me/+549{{ $chat->telefonoAdicional }}"
                                                 class="btn btn-success btn-sm" data-toggle="tooltip"
                                                 data-container=".content" title="Chatear">
                                                 <i class="fab fa-whatsapp"></i>
@@ -95,19 +95,28 @@
 
                                         {{-- Finalizado --}}
                                         @if ($chat->status == 1)
-                                            <button wire:loading.attr="disabled" wire:click="finalizado({{ $chat->id }})"
+                                            <button wire:loading.attr="disabled"
+                                                wire:click="finalizado({{ $chat->id }})"
                                                 class="btn btn-primary btn-sm" data-toggle="tooltip"
                                                 data-container=".content" title="Finalizado">
                                                 <i class="fas fa-check"></i>
                                             </button>
                                         @endif
-
                                     </div>
-
                                 </td>
-
-
-
+                            </tr>
+                            {{-- Consulta in 1 row. --}}
+                            <tr>
+                                <td colspan="7">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Consulta:</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            {{ $chat->consulta }}
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
 
