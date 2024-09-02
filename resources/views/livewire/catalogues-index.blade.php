@@ -68,7 +68,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($categoria->productosPublicados as $producto)
+                                            @foreach ($categoria->productosPublicados->sortBy('nombre') as $producto)
                                                 <tr>
                                                     <td class="align-middle">
                                                         <span
