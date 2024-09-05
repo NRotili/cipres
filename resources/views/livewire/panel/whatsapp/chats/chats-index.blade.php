@@ -71,15 +71,11 @@
 
                         @foreach ($chats as $chat)
                             <tr>
-                                @if ($chat->cliente)
-                                    <td>{{ $chat->cliente->nombre }}</td>
-                                    <td>{{ $chat->cliente->apellido }}</td>
-                                    <td>{{ $chat->telefonoAdicional }}</td>
-                                @else
-                                    <td>SIN REGISTRAR</td>
-                                    <td>SIN REGISTRAR</td>
-                                    <td>{{ $chat->telefonoAdicional }}</td>
-                                @endif
+
+                                <td>{{ $chat->cliente->nombre }}</td>
+                                <td>{{ $chat->cliente->apellido }}</td>
+                                <td>{{ $chat->cliente->telefono }}</td>
+
                                 <td>{{ $chat->tipo }}</td>
                                 <td>{{ \Carbon\Carbon::parse($chat->created_at)->format('d/m/Y - H:i') }}</td>
 
