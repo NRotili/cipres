@@ -3,6 +3,7 @@
 namespace App\Livewire\Panel\Whatsapp\Chats;
 
 use App\Models\Chat;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -42,6 +43,30 @@ class ChatsIndex extends Component
         $chat = Chat::find($id);
         $chat->status = -1;
         $chat->save();
+
+        try{
+            $response = Http::post('http://localhost:3008/v1/messages', [
+                'number' => $chat->cliente->telefono,
+                'message' => 'Gracias por contactarnos, su consulta ha sido finalizada.',
+            ]);
+            toastr()->success("Chat con " . $chat->cliente->nombre . " finalizado");
+        } catch (\Exception $e){
+            toastr()->error('Error al enviar el mensaje');
+        }
+
+        if($response->status() == 200){
+            try {
+                Http::post('http://localhost:3008/v1/blacklist', [
+                    'number' => $chat->cliente->telefono,
+                    'intent' => 'remove',
+                ]);
+            } catch (\Exception $e) {
+                toastr()->error('Error al enviar el mensaje');
+            }
+        } else {
+            toastr()->error('Error al enviar el mensaje');
+        }
+      
 
         $this->render();
     }

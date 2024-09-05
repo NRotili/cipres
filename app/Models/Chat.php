@@ -9,6 +9,15 @@ class Chat extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nombre',
+        'telefono',
+        'consulta',
+        'tipo',
+        'status',
+        'client_id',
+    ];
+
     //chat belongs to a client
     public function cliente()
     {
