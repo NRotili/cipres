@@ -56,7 +56,7 @@ class ChatsIndex extends Component
 
         if($response->status() == 200){
             try {
-                Http::post('http://localhost:3008/v1/blacklist', [
+                Http::post(env('BOT_WHATSAPP').'v1/blacklist', [
                     'number' => $chat->cliente->telefono,
                     'intent' => 'remove',
                 ]);
