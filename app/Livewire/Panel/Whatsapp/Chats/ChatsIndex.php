@@ -47,7 +47,7 @@ class ChatsIndex extends Component
         try{
             $response = Http::post(env('BOT_WHATSAPP').'v1/messages', [
                 'number' => $chat->cliente->telefono,
-                'message' => 'Gracias por contactarnos, su consulta ha sido finalizada.',
+                'message' => "Gracias por comunicarte con CIPRES! \nTu chat ha sido finalizado!\nTe esperamos pronto en Urquiza 721! 👋.",
             ]);
             toastr()->success("Chat con " . $chat->cliente->nombre . " finalizado");
         } catch (\Exception $e){
