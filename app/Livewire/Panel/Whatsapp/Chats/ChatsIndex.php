@@ -45,7 +45,7 @@ class ChatsIndex extends Component
         $chat->save();
 
         try{
-            $response = Http::post('http://localhost:3008/v1/messages', [
+            $response = Http::post(env('BOT_WHATSAPP').'v1/messages', [
                 'number' => $chat->cliente->telefono,
                 'message' => 'Gracias por contactarnos, su consulta ha sido finalizada.',
             ]);
