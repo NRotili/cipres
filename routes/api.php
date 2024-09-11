@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Route POST /chats
 Route::post('/wsp/listaEspera', [wspController::class, 'listaEspera']);
+Route::post('/wsp/registrarCliente', [wspController::class, 'registrarCliente']);

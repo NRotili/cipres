@@ -66,6 +66,8 @@ class wspController extends Controller
                 'nombre' => $request->nombre,
                 'telefono' => $request->telefono,
                 'consulta' => $request->consulta,
+                'tipo' => $request->tipo,
+                'status' => $request->status,
 
             ],
             [
@@ -73,6 +75,7 @@ class wspController extends Controller
                 'telefono' => 'required|numeric',
                 'consulta' => 'required|max:255',
                 'tipo' => 'required|max:255',
+                'status' => 'required|numeric',
             ],
         );
 
@@ -96,6 +99,7 @@ class wspController extends Controller
                     'client_id' => $cliente->id,
                     'consulta' => $request->consulta,
                     'tipo' => $request->tipo,
+                    'status' => $request->status,
                 ]);
 
                 $cantEsperando = Chat::where('status', 1)->orderBy('created_at')->count();
