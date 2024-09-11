@@ -3,6 +3,8 @@
 namespace App\Livewire\Panel\Whatsapp\Chats;
 
 use App\Models\Chat;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Barryvdh\Debugbar\Twig\Extension\Debug;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -10,27 +12,27 @@ use Livewire\WithPagination;
 class ChatsIndex extends Component
 {
     use WithPagination;
-    protected $paginationTheme= "bootstrap";
+    protected $paginationTheme = "bootstrap";
 
-    public $nombre, $apellido, $tipo, $status = 1, $telefono, $cantPagina = 10;
-    
+    public $nombre, $apellido, $tipo, $status, $telefono, $cantPagina = 10;
+
     public function render()
     {
 
-        $chats = Chat::when($this->status, function($query, $status){
+        $chats = Chat::when($this->status, function ($query, $status) {
             $query->where('status', $status);
         })
-        ->when($this->tipo, function($query, $tipo){
-            $query->where('tipo','LIKE','%' . $tipo . '%');
-        })
-        //Obtener a través de un belongstoMany los chats que pertenecen a un cliente
-        ->when($this->nombre, function($query, $nombre){
-            $query->whereHas('cliente', function($query) use ($nombre){
-                $query->where('nombre','LIKE','%' . $nombre . '%');
-            });
-        })
-        ->orderBy('created_at', 'ASC')
-        ->paginate($this->cantPagina);
+            ->when($this->tipo, function ($query, $tipo) {
+                $query->where('tipo', 'LIKE', '%' . $tipo . '%');
+            })
+            //Obtener a través de un belongstoMany los chats que pertenecen a un cliente
+            ->when($this->nombre, function ($query, $nombre) {
+                $query->whereHas('cliente', function ($query) use ($nombre) {
+                    $query->where('nombre', 'LIKE', '%' . $nombre . '%');
+                });
+            })
+            ->orderBy('created_at', 'ASC')
+            ->paginate($this->cantPagina);
 
 
 
@@ -39,24 +41,25 @@ class ChatsIndex extends Component
     }
 
     //finalizado
-    public function finalizado($id){
+    public function finalizado($id)
+    {
         $chat = Chat::find($id);
         $chat->status = -1;
         $chat->save();
 
-        try{
-            $response = Http::post(env('BOT_WHATSAPP').'v1/messages', [
+        try {
+            $response = Http::post(env('BOT_WHATSAPP') . 'v1/messages', [
                 'number' => $chat->cliente->telefono,
                 'message' => "Gracias por comunicarte con CIPRES! \nTu chat ha sido finalizado!\nTe esperamos pronto en Urquiza 721! 👋.",
             ]);
             toastr()->success("Chat con " . $chat->cliente->nombre . " finalizado");
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             toastr()->error('Error al enviar el mensaje');
         }
 
-        if($response->status() == 200){
+        if ($response->status() == 200) {
             try {
-                Http::post(env('BOT_WHATSAPP').'v1/blacklist', [
+                Http::post(env('BOT_WHATSAPP') . 'v1/blacklist', [
                     'number' => $chat->cliente->telefono,
                     'intent' => 'remove',
                 ]);
@@ -66,7 +69,34 @@ class ChatsIndex extends Component
         } else {
             toastr()->error('Error al enviar el mensaje');
         }
-      
+
+
+        $this->render();
+    }
+
+    //botDetenido
+    public function botDetenido($id)
+    {
+        Debugbar::info(env('BOT_WHATSAPP'));
+        $chat = Chat::find($id);
+
+        try {
+            $response = Http::post(env('BOT_WHATSAPP') . 'v1/blacklist', [
+                'number' => $chat->cliente->telefono,
+                'intent' => 'add',
+            ]);
+            Debugbar::info($response);
+        } catch (\Exception $e) {
+            toastr()->error('Error al detener el bot');
+        }
+        
+        if ($response->status() == 200) {
+            $chat->status = 2;
+            $chat->save();
+            toastr()->success("Bot con " . $chat->cliente->nombre . " detenido");
+        } else {
+            toastr()->error('Error al detener el bot');
+        }
 
         $this->render();
     }

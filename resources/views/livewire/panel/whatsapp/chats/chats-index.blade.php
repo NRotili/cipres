@@ -27,8 +27,11 @@
                     <label for="status">Filtrar por estado</label>
                     <select wire:model.live="status" class="form-control" id="status">
                         <option value="">Todos</option>
+                        <option value="-1">Atendido por humano</option>
+                        <option value="-2">Atendido por bot</option>
+                        <option value="2">Bot detenido</option>
+                        <option value="0">Bot trabajando</option>
                         <option value="1">Sin responder</option>
-                        <option value="-1">Atendidos</option>
                     </select>
                 </div>
 
@@ -59,12 +62,12 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
+                            <th>Nombre completo</th>
                             <th>Telefono</th>
                             <th>Tipo de contacto</th>
                             <th>Solicitud</th>
-                            <th colspan="2">Acciones</th>
+                            <th>Estado</th>
+                            <th">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,13 +75,23 @@
                         @foreach ($chats as $chat)
                             <tr>
 
-                                <td>{{ $chat->cliente->nombre }}</td>
-                                <td>{{ $chat->cliente->apellido }}</td>
+                                <td>{{ $chat->cliente->nombre }} {{ $chat->cliente->apellido }}</td>
                                 <td>{{ $chat->cliente->telefono }}</td>
-
                                 <td>{{ $chat->tipo }}</td>
                                 <td>{{ \Carbon\Carbon::parse($chat->created_at)->format('d/m/Y - H:i') }}</td>
-
+                                <td>
+                                    @if ($chat->status == 1)
+                                        <span class="badge badge-danger">Sin responder</span>
+                                    @elseif ($chat->status == -1)
+                                        <span class="badge badge-success">Atendido por humano</span>
+                                    @elseif ($chat->status == -2)
+                                        <span class="badge badge-success">Atendido por bot</span>
+                                    @elseif ($chat->status == 0)
+                                        <span class="badge badge-info">Bot trabajando</span>
+                                    @elseif ($chat->status == 2)
+                                        <span class="badge badge-warning">Bot detenido</span>
+                                    @endif
+                                </td>
                                 <td width="10px">
                                     <div class="btn-group">
                                         @if ($chat->cliente->telefono)
@@ -87,6 +100,16 @@
                                                 data-container=".content" title="Chatear">
                                                 <i class="fab fa-whatsapp"></i>
                                             </a>
+                                        @endif
+
+                                        {{-- bot trabajando --}}
+                                        @if ($chat->status == 0)
+                                            <button wire:loading.attr="disabled"
+                                                wire:click="botDetenido({{ $chat->id }})"
+                                                class="btn btn-warning btn-sm" data-toggle="tooltip"
+                                                data-container=".content" title="Detener bot">
+                                                <i class="fas fa-pause"></i>
+                                            </button>
                                         @endif
 
                                         {{-- Finalizado --}}
