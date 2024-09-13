@@ -67,10 +67,10 @@
                             <th>Tipo de contacto</th>
                             <th>Solicitud</th>
                             <th>Estado</th>
-                            <th">Acciones</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody wire:poll.keep-alive.30s>
 
                         @foreach ($chats as $chat)
                             <tr>
@@ -78,7 +78,7 @@
                                 <td>{{ $chat->cliente->nombre }} {{ $chat->cliente->apellido }}</td>
                                 <td>{{ $chat->cliente->telefono }}</td>
                                 <td>{{ $chat->tipo }}</td>
-                                <td>{{ \Carbon\Carbon::parse($chat->created_at)->format('d/m/Y - H:i') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($chat->updated_at)->format('d/m/Y - H:i') }}</td>
                                 <td>
                                     @if ($chat->status == 1)
                                         <span class="badge badge-danger">Sin responder</span>
@@ -113,7 +113,7 @@
                                         @endif
 
                                         {{-- Finalizado --}}
-                                        @if ($chat->status == 1)
+                                        @if ($chat->status == 1 || $chat->status==2)
                                             <button wire:loading.attr="disabled"
                                                 wire:click="finalizado({{ $chat->id }})"
                                                 class="btn btn-primary btn-sm" data-toggle="tooltip"
@@ -125,6 +125,7 @@
                                 </td>
                             </tr>
                             {{-- Consulta in 1 row. --}}
+                            @if($chat->consulta && ($chat->status == 1))
                             <tr>
                                 <td colspan="7">
                                     <div class="card">
@@ -137,6 +138,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            @endif
                         @endforeach
 
                     </tbody>

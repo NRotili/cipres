@@ -11,6 +11,56 @@ use Illuminate\Support\Facades\Validator;
 class wspController extends Controller
 {
 
+    public function actualizarListaEspera(Request $request, $id)
+    {
+        //Validar recepcion de datos
+        $validatedData = Validator::make(
+            [
+                'id' => $id,
+                'status' => $request->status,
+                'tipo' => $request->tipo,
+                'consulta' => $request->consulta,
+            ],
+            [
+                'id' => 'required|numeric',
+                'status' => 'required|numeric',
+                'tipo' => 'required|max:255',
+                'consulta' => 'required|max:255',
+            ],
+        );
+
+        if ($validatedData->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Datos incorrectos',
+                'errors' => $validatedData->errors(),
+            ], 400);
+        } else {
+
+            $chat = Chat::find($id);
+
+            if (!$chat) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Chat no encontrado',
+                ], 404);
+            } else {
+                $cantEsperando = Chat::where('status', 1)->orWhere('status', 2)->orderBy('updated_at')->count();
+                
+                $chat->status = $request->status;
+                $chat->tipo = $request->tipo;
+                $chat->consulta = $request->consulta;
+                $chat->save();
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Chat actualizado',
+                    'cantEsperando' => $cantEsperando,
+                ], 200);
+            }
+        }
+    }
+
     public function registrarCliente(Request $request)
     {
         //Validar recepcion de datos
@@ -55,6 +105,45 @@ class wspController extends Controller
         }
     }
 
+    public function finChat($id)
+    {
+        //Validar recepcion de datos
+        $validatedData = Validator::make(
+            [
+                'id' => $id,
+            ],
+            [
+                'id' => 'required|numeric',
+            ],
+        );
+
+        if ($validatedData->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Datos incorrectos',
+                'errors' => $validatedData->errors(),
+            ], 400);
+        } else {
+
+            $chat = Chat::find($id);
+
+            if (!$chat) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Chat no encontrado',
+                ], 404);
+            } else {
+                $chat->status = -2;
+                $chat->save();
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Chat finalizado',
+                ], 200);
+            }
+        }
+    }
+
     public function listaEspera(Request $request)
     {
 
@@ -65,7 +154,6 @@ class wspController extends Controller
                 'tipo' => $request->tipo,
                 'nombre' => $request->nombre,
                 'telefono' => $request->telefono,
-                'consulta' => $request->consulta,
                 'tipo' => $request->tipo,
                 'status' => $request->status,
 
@@ -73,7 +161,6 @@ class wspController extends Controller
             [
                 'nombre' => 'required|max:255',
                 'telefono' => 'required|numeric',
-                'consulta' => 'required|max:255',
                 'tipo' => 'required|max:255',
                 'status' => 'required|numeric',
             ],
@@ -102,13 +189,13 @@ class wspController extends Controller
                     'status' => $request->status,
                 ]);
 
-                $cantEsperando = Chat::where('status', 1)->orderBy('created_at')->count();
+                $cantEsperando = Chat::where('status', 1)->orWhere('status', 2)->orderBy('updated_at')->count();
                 return response()->json([
+                    'id' => $chat->id,
                     'status' => 'success',
                     'message' => 'Cliente enviado a la cola de espera',
                     'cantEsperando' => $cantEsperando,
                 ], 200);
-                
             } catch (\Exception $e) {
                 return response()->json([
                     'status' => 'error',
@@ -116,7 +203,6 @@ class wspController extends Controller
                     'error' => $e->getMessage(),
                 ], 500);
             }
-
         }
     }
 }

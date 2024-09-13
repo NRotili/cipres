@@ -12,9 +12,15 @@ use Livewire\WithPagination;
 class ChatsIndex extends Component
 {
     use WithPagination;
+
     protected $paginationTheme = "bootstrap";
 
     public $nombre, $apellido, $tipo, $status, $telefono, $cantPagina = 10;
+
+    public function updating($nombre)
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
@@ -31,7 +37,7 @@ class ChatsIndex extends Component
                     $query->where('nombre', 'LIKE', '%' . $nombre . '%');
                 });
             })
-            ->orderBy('created_at', 'ASC')
+            ->orderBy('updated_at', 'ASC')
             ->paginate($this->cantPagina);
 
 
