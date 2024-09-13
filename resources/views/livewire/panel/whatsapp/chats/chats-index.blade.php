@@ -70,7 +70,7 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody wire:poll.keep-alive.30s>
+                    <tbody wire:poll.10s>
 
                         @foreach ($chats as $chat)
                             <tr>
