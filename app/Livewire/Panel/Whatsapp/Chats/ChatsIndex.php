@@ -37,7 +37,12 @@ class ChatsIndex extends Component
                     $query->where('nombre', 'LIKE', '%' . $nombre . '%');
                 });
             })
-            ->orderBy('updated_at', 'ASC')
+            ->when($this->telefono, function ($query, $telefono) {
+                $query->whereHas('cliente', function ($query) use ($telefono) {
+                    $query->where('telefono', 'LIKE', '%' . $telefono . '%');
+                });
+            })
+            ->orderBy('updated_at', 'DESC')
             ->paginate($this->cantPagina);
 
 
