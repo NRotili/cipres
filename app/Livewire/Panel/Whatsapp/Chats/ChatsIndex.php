@@ -43,7 +43,7 @@ class ChatsIndex extends Component
                 });
             })
             ->orderByRaw("FIELD(status, 1, 2, 0, -1, -2)")
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('created_at', 'ASC')
             ->paginate($this->cantPagina);
 
 

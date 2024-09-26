@@ -181,6 +181,20 @@ class wspController extends Controller
                 $cliente = $response->original['data'];
             }
 
+            $existeChat = Chat::where('client_id', $cliente->id)
+                    ->where('status', 1)
+                    ->orWhere('status', 2)
+                    ->orWhere('status',0)
+                    ->first();
+
+            if ($existeChat) {
+                return response()->json([
+                    'id' => $existeChat->id,
+                    'status' => 'success',
+                    'message' => 'Ya existe un chat en espera',
+                ], 200);
+            }
+            
             try {
                 $chat = Chat::create([
                     'client_id' => $cliente->id,
