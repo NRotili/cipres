@@ -59,90 +59,93 @@
 
 
             <div class="card-body">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Nombre completo</th>
-                            <th>Telefono</th>
-                            <th>Tipo de contacto</th>
-                            <th>Solicitud</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody wire:poll.10s>
-
-                        @foreach ($chats as $chat)
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
                             <tr>
-
-                                <td>{{ $chat->cliente->nombre }} {{ $chat->cliente->apellido }}</td>
-                                <td>{{ $chat->cliente->telefono }}</td>
-                                <td>{{ $chat->tipo }}</td>
-                                <td>{{ \Carbon\Carbon::parse($chat->updated_at)->format('d/m/Y - H:i') }}</td>
-                                <td>
-                                    @if ($chat->status == 1)
-                                        <span class="badge badge-danger">Sin responder</span>
-                                    @elseif ($chat->status == -1)
-                                        <span class="badge badge-success">Atendido por humano</span>
-                                    @elseif ($chat->status == -2)
-                                        <span class="badge badge-success">Atendido por bot</span>
-                                    @elseif ($chat->status == 0)
-                                        <span class="badge badge-info">Bot trabajando</span>
-                                    @elseif ($chat->status == 2)
-                                        <span class="badge badge-warning">Bot detenido</span>
-                                    @endif
-                                </td>
-                                <td width="10px">
-                                    <div class="btn-group">
-                                        @if ($chat->cliente->telefono)
-                                            <a target="_blank" href="https://wa.me/+549{{ $chat->cliente->telefono }}"
-                                                class="btn btn-success btn-sm" data-toggle="tooltip"
-                                                data-container=".content" title="Chatear">
-                                                <i class="fab fa-whatsapp"></i>
-                                            </a>
-                                        @endif
-
-                                        {{-- bot trabajando --}}
-                                        @if ($chat->status == 0)
-                                            <button wire:loading.attr="disabled"
-                                                wire:click="botDetenido({{ $chat->id }})"
-                                                class="btn btn-warning btn-sm" data-toggle="tooltip"
-                                                data-container=".content" title="Detener bot">
-                                                <i class="fas fa-pause"></i>
-                                            </button>
-                                        @endif
-
-                                        {{-- Finalizado --}}
-                                        @if ($chat->status == 1 || $chat->status==2)
-                                            <button wire:loading.attr="disabled"
-                                                wire:click="finalizado({{ $chat->id }})"
-                                                class="btn btn-primary btn-sm" data-toggle="tooltip"
-                                                data-container=".content" title="Finalizado">
-                                                <i class="fas fa-check"></i>
-                                            </button>
-                                        @endif
-                                    </div>
-                                </td>
+                                <th>Nombre completo</th>
+                                <th>Telefono</th>
+                                <th>Tipo de contacto</th>
+                                <th>Solicitud</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
                             </tr>
-                            {{-- Consulta in 1 row. --}}
-                            @if($chat->consulta && ($chat->status == 1))
-                            <tr>
-                                <td colspan="7">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <strong>Consulta:</strong>
-                                        </div>
-                                        <div class="card-body">
-                                            {{ $chat->consulta }}
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endif
-                        @endforeach
+                        </thead>
+                        <tbody wire:poll.10s>
 
-                    </tbody>
-                </table>
+                            @foreach ($chats as $chat)
+                                <tr>
+
+                                    <td>{{ $chat->cliente->nombre }} {{ $chat->cliente->apellido }}</td>
+                                    <td>{{ $chat->cliente->telefono }}</td>
+                                    <td>{{ $chat->tipo }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($chat->updated_at)->format('d/m/Y - H:i') }}</td>
+                                    <td>
+                                        @if ($chat->status == 1)
+                                            <span class="badge badge-danger">Sin responder</span>
+                                        @elseif ($chat->status == -1)
+                                            <span class="badge badge-success">Atendido por humano</span>
+                                        @elseif ($chat->status == -2)
+                                            <span class="badge badge-success">Atendido por bot</span>
+                                        @elseif ($chat->status == 0)
+                                            <span class="badge badge-info">Bot trabajando</span>
+                                        @elseif ($chat->status == 2)
+                                            <span class="badge badge-warning">Bot detenido</span>
+                                        @endif
+                                    </td>
+                                    <td width="10px">
+                                        <div class="btn-group">
+                                            @if ($chat->cliente->telefono)
+                                                <a target="_blank"
+                                                    href="https://wa.me/+549{{ $chat->cliente->telefono }}"
+                                                    class="btn btn-success btn-sm" data-toggle="tooltip"
+                                                    data-container=".content" title="Chatear">
+                                                    <i class="fab fa-whatsapp"></i>
+                                                </a>
+                                            @endif
+
+                                            {{-- bot trabajando --}}
+                                            @if ($chat->status == 0)
+                                                <button wire:loading.attr="disabled"
+                                                    wire:click="botDetenido({{ $chat->id }})"
+                                                    class="btn btn-warning btn-sm" data-toggle="tooltip"
+                                                    data-container=".content" title="Detener bot">
+                                                    <i class="fas fa-pause"></i>
+                                                </button>
+                                            @endif
+
+                                            {{-- Finalizado --}}
+                                            @if ($chat->status == 1 || $chat->status == 2)
+                                                <button wire:loading.attr="disabled"
+                                                    wire:click="finalizado({{ $chat->id }})"
+                                                    class="btn btn-primary btn-sm" data-toggle="tooltip"
+                                                    data-container=".content" title="Finalizado">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            @endif
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{-- Consulta in 1 row. --}}
+                                @if ($chat->consulta && $chat->status == 1)
+                                    <tr>
+                                        <td colspan="7">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <strong>Consulta:</strong>
+                                                </div>
+                                                <div class="card-body">
+                                                    {{ $chat->consulta }}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="card-footer">

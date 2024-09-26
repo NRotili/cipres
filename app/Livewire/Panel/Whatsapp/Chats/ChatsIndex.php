@@ -42,7 +42,8 @@ class ChatsIndex extends Component
                     $query->where('telefono', 'LIKE', '%' . $telefono . '%');
                 });
             })
-            ->orderBy('updated_at', 'DESC')
+            ->orderByRaw("FIELD(status, 1, 2, 0, -1, -2)")
+            ->orderBy('created_at', 'DESC')
             ->paginate($this->cantPagina);
 
 
