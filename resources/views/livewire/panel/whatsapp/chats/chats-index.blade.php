@@ -97,7 +97,7 @@
                                         <div class="btn-group">
                                             @if ($chat->cliente->telefono)
                                                 <a target="_blank"
-                                                    href="https://wa.me/+549{{ $chat->cliente->telefono }}"
+                                                    href="https://wa.me/+{{ $chat->cliente->telefono }}"
                                                     class="btn btn-success btn-sm" data-toggle="tooltip"
                                                     data-container=".content" title="Chatear">
                                                     <i class="fab fa-whatsapp"></i>

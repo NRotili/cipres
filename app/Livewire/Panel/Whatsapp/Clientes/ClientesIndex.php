@@ -3,8 +3,11 @@
 namespace App\Livewire\Panel\Whatsapp\Clientes;
 
 use App\Models\Cliente;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Symfony\Component\ErrorHandler\Debug;
 
 class ClientesIndex extends Component
 {
@@ -35,5 +38,83 @@ class ClientesIndex extends Component
         ->paginate($this->cantPagina);
 
         return view('livewire.panel.whatsapp.clientes.clientes-index', compact('clientes'));
+    }
+
+    //stopBot
+    public function stopBot(Cliente $cliente)
+    {
+        
+        try {
+            $response = Http::post(env('BOT_WHATSAPP') . 'v1/blacklist', [
+                'number' => $cliente->telefono,
+                'intent' => 'add',
+            ]);
+
+            Debugbar::info($response);
+            
+            if ($response->status() == 200) {
+                toastr()->title('Información')
+                    ->success("Bot con " . $cliente->nombre . " detenido")
+                    ->timeOut(2000)
+                    ->progressBar()
+                    ->flash();
+            } else {
+                toastr()
+                ->title('Error')
+                ->error('Error al detener el bot')
+                ->timeOut(2000)
+                ->progressBar()
+                ->flash();
+            }
+
+        } catch (\Exception $e) {
+            toastr()
+                ->title('Error')
+                ->error('Error al detener el bot')
+                ->timeOut(2000)
+                ->progressBar()
+                ->flash();
+        }
+
+        $this->render();   
+    }
+
+    //startBot
+    public function startBot(Cliente $cliente)
+    {
+        
+        try {
+            $response = Http::post(env('BOT_WHATSAPP') . 'v1/blacklist', [
+                'number' => $cliente->telefono,
+                'intent' => 'remove',
+            ]);
+
+            Debugbar::info($response);
+            
+            if ($response->status() == 200) {
+                toastr()->title('Información')
+                    ->success("Bot con " . $cliente->nombre . " iniciado")
+                    ->timeOut(2000)
+                    ->progressBar()
+                    ->flash();
+            } else {
+                toastr()
+                ->title('Error')
+                ->error('Error al iniciar el bot')
+                ->timeOut(2000)
+                ->progressBar()
+                ->flash();
+            }
+
+        } catch (\Exception $e) {
+            toastr()
+                ->title('Error')
+                ->error('Error al iniciar el bot')
+                ->timeOut(2000)
+                ->progressBar()
+                ->flash();
+        }
+
+        $this->render();   
     }
 }

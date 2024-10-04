@@ -64,9 +64,29 @@ class ChatsIndex extends Component
                 'number' => $chat->cliente->telefono,
                 'message' => "Gracias por comunicarte con CIPRES! \nTu chat ha sido finalizado!\nTe esperamos pronto en Urquiza 721! 👋.",
             ]);
-            toastr()->success("Chat con " . $chat->cliente->nombre . " finalizado");
+            if ($response->status() == 200) {
+                toastr()
+                    ->title('Información')
+                    ->success("Chat con " . $chat->cliente->nombre . " finalizado")
+                    ->timeOut(2000)
+                    ->progressBar()
+                    ->flash();
+            } else {
+                toastr()
+                    ->title('Error')
+                    ->error('Error al enviar el mensaje')
+                    ->timeOut(2000)
+                    ->progressBar()
+                    ->flash();
+            }
+            
         } catch (\Exception $e) {
-            toastr()->error('Error al enviar el mensaje');
+            toastr()
+                ->title('Error')
+                ->error('Error al enviar el mensaje')
+                ->timeOut(2000)
+                ->progressBar()
+                ->flash();
         }
 
         if ($response->status() == 200) {
@@ -76,10 +96,10 @@ class ChatsIndex extends Component
                     'intent' => 'remove',
                 ]);
             } catch (\Exception $e) {
-                toastr()->error('Error al enviar el mensaje');
+                toastr()->title('Error')->error('Error al detener el bot')->timeOut(2000)->progressBar()->flash();
             }
         } else {
-            toastr()->error('Error al enviar el mensaje');
+            toastr()->title('Error')->error('Error al detener el bot')->timeOut(2000)->progressBar()->flash();
         }
 
 
@@ -97,17 +117,18 @@ class ChatsIndex extends Component
                 'number' => $chat->cliente->telefono,
                 'intent' => 'add',
             ]);
+            
             Debugbar::info($response);
         } catch (\Exception $e) {
-            toastr()->error('Error al detener el bot');
+            toastr()->title('Error')->error('Error al detener el bot')->timeOut(2000)->progressBar()->flash();
         }
         
         if ($response->status() == 200) {
             $chat->status = 2;
             $chat->save();
-            toastr()->success("Bot con " . $chat->cliente->nombre . " detenido");
+            toastr()->title('Información')->success("Bot con " . $chat->cliente->nombre . " detenido")->timeOut(2000)->progressBar()->flash();
         } else {
-            toastr()->error('Error al detener el bot');
+            toastr()->title('Error')->error('Error al detener el bot')->timeOut(2000)->progressBar()->flash();
         }
 
         $this->render();

@@ -75,6 +75,16 @@
                                 <td>{{ $cliente->email }}</td>
                                 <td>{{ $cliente->localidad }}</td>
                                 <td>
+
+                                    {{-- stopBot --}}
+                                    <button wire:loading.attr="disabled" wire:click="stopBot({{ $cliente }})" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-pause"></i>
+                                    </button>
+
+                                    {{-- startBot --}}
+                                    <button wire:loading.attr="disabled" wire:click="startBot({{ $cliente }})" class="btn btn-success btn-sm">
+                                        <i class="fas fa-play"></i>
+                                    </button>
                           
                                     <button wire:click="showmore({{ $cliente->id }})" class="btn btn-primary btn-sm"
                                         data-toggle="modal" data-target="#clienteModal">
