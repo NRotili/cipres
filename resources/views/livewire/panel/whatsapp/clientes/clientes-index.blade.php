@@ -54,60 +54,67 @@
 
 
             <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Telefono</th>
-                            <th>Email</th>
-                            <th>Localidad</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach ($clientes as $cliente)
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
                             <tr>
-                                <td>{{ $cliente->nombre }}</td>
-                                <td>{{ $cliente->apellido }}</td>
-                                <td>{{ $cliente->telefono }}</td>
-                                <td>{{ $cliente->email }}</td>
-                                <td>{{ $cliente->localidad }}</td>
-                                <td>
-
-                                    {{-- stopBot --}}
-                                    <button wire:loading.attr="disabled" wire:click="stopBot({{ $cliente }})" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-pause"></i>
-                                    </button>
-
-                                    {{-- startBot --}}
-                                    <button wire:loading.attr="disabled" wire:click="startBot({{ $cliente }})" class="btn btn-success btn-sm">
-                                        <i class="fas fa-play"></i>
-                                    </button>
-                          
-                                    <button wire:click="showmore({{ $cliente->id }})" class="btn btn-primary btn-sm"
-                                        data-toggle="modal" data-target="#clienteModal">
-                                        <i class="fas fa-info"></i>
-                                    </button>
-                         
-                                    <button wire:click="edit({{ $cliente->id }})" class="btn btn-info btn-sm"
-                                        data-toggle="modal" data-target="#clienteModal">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                   
-                                </td>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Telefono</th>
+                                <th>Email</th>
+                                <th>Localidad</th>
+                                <th>Acciones</th>
                             </tr>
-                        @endforeach
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
+                            @foreach ($clientes as $cliente)
+                                <tr>
+                                    <td>{{ $cliente->nombre }}</td>
+                                    <td>{{ $cliente->apellido }}</td>
+                                    <td>{{ $cliente->telefono }}</td>
+                                    <td>{{ $cliente->email }}</td>
+                                    <td>{{ $cliente->localidad }}</td>
+                                    <td width="10px">
+
+                                        <div class="btn-group">
+
+                                            {{-- stopBot --}}
+                                            <button wire:loading.attr="disabled"
+                                                wire:click="stopBot({{ $cliente }})" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-pause"></i>
+                                            </button>
+
+                                            {{-- startBot --}}
+                                            <button wire:loading.attr="disabled"
+                                                wire:click="startBot({{ $cliente }})"
+                                                class="btn btn-success btn-sm">
+                                                <i class="fas fa-play"></i>
+                                            </button>
+
+                                            <button wire:click="showmore({{ $cliente->id }})"
+                                                class="btn btn-primary btn-sm" data-toggle="modal"
+                                                data-target="#clienteModal">
+                                                <i class="fas fa-info"></i>
+                                            </button>
+
+                                            <button wire:click="edit({{ $cliente->id }})" class="btn btn-info btn-sm"
+                                                data-toggle="modal" data-target="#clienteModal">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="card-footer">
                 {{ $clientes->links() }}
             </div>
-
         @else
             <div class="card-body">
                 <strong>No hay registros</strong>

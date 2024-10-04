@@ -56,8 +56,7 @@ class ChatsIndex extends Component
     public function finalizado($id)
     {
         $chat = Chat::find($id);
-        $chat->status = -1;
-        $chat->save();
+
 
         try {
             $response = Http::post(env('BOT_WHATSAPP') . 'v1/messages', [
@@ -71,6 +70,18 @@ class ChatsIndex extends Component
                     ->timeOut(2000)
                     ->progressBar()
                     ->flash();
+
+                $chat->status = -1;
+                $chat->save();
+
+                try {
+                    Http::post(env('BOT_WHATSAPP') . 'v1/blacklist', [
+                        'number' => $chat->cliente->telefono,
+                        'intent' => 'remove',
+                    ]);
+                } catch (\Exception $e) {
+                    toastr()->title('Error')->error('Error al detener el bot')->timeOut(2000)->progressBar()->flash();
+                }
             } else {
                 toastr()
                     ->title('Error')
@@ -79,28 +90,16 @@ class ChatsIndex extends Component
                     ->progressBar()
                     ->flash();
             }
-            
         } catch (\Exception $e) {
             toastr()
                 ->title('Error')
-                ->error('Error al enviar el mensaje')
+                ->error('Error al finalizar chat' . $e->getMessage())
                 ->timeOut(2000)
                 ->progressBar()
                 ->flash();
         }
 
-        if ($response->status() == 200) {
-            try {
-                Http::post(env('BOT_WHATSAPP') . 'v1/blacklist', [
-                    'number' => $chat->cliente->telefono,
-                    'intent' => 'remove',
-                ]);
-            } catch (\Exception $e) {
-                toastr()->title('Error')->error('Error al detener el bot')->timeOut(2000)->progressBar()->flash();
-            }
-        } else {
-            toastr()->title('Error')->error('Error al detener el bot')->timeOut(2000)->progressBar()->flash();
-        }
+
 
 
         $this->render();
@@ -117,12 +116,12 @@ class ChatsIndex extends Component
                 'number' => $chat->cliente->telefono,
                 'intent' => 'add',
             ]);
-            
+
             Debugbar::info($response);
         } catch (\Exception $e) {
             toastr()->title('Error')->error('Error al detener el bot')->timeOut(2000)->progressBar()->flash();
         }
-        
+
         if ($response->status() == 200) {
             $chat->status = 2;
             $chat->save();
