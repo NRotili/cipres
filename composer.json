@@ -23,7 +23,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",
         "fakerphp/faker": "^1.9.1",
-        "laravel/sail": "^1.0.1",
+        "laravel/sail": "*",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.0",
