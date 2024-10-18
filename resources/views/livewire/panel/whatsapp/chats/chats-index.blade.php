@@ -1,4 +1,26 @@
 <div>
+    <div class="pt-3">
+        <div class="d-flex justify-content-between align-items-center" wire:poll.300s="checkServices">
+            <h2 class="flex-grow-1">Whatsapp - Chats</h2>
+
+            
+            @if ($estadoServicio == 'ONLINE')
+                <span class="badge badge-success mr-1 float-right">ONLINE</span>
+                <div class="led led-green float-right mr-3"></div>
+            @elseif ($estadoServicio == 'SCAN')
+                <span class="badge badge-warning mr-1 float-right">ESCANEAR QR</span>
+                <div class="led led-yellow float-right mr-3"></div>
+            @elseif ($estadoServicio == 'ERROR')
+                <span class="badge badge-danger mr-1 float-right">ERROR</span>
+                <div class="led led-red float-right mr-3"></div>
+            @endif
+
+            <button class="btn btn-secondary float-right" wire:click="openModal" data-toggle="modal" data-target="#modalQr">
+                <i class="fas fa-qrcode"></i>
+            </button>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-header">
             <div class="form-row">
@@ -71,7 +93,7 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody wire:poll.10s>
+                        <tbody @if (!$modalVisible) wire:poll.10s @endif>
 
                             @foreach ($chats as $chat)
                                 <tr>
@@ -96,8 +118,7 @@
                                     <td width="10px">
                                         <div class="btn-group">
                                             @if ($chat->cliente->telefono)
-                                                <a target="_blank"
-                                                    href="https://wa.me/+{{ $chat->cliente->telefono }}"
+                                                <a target="_blank" href="https://wa.me/+{{ $chat->cliente->telefono }}"
                                                     class="btn btn-success btn-sm" data-toggle="tooltip"
                                                     data-container=".content" title="Chatear">
                                                     <i class="fab fa-whatsapp"></i>
@@ -159,4 +180,26 @@
         @endif
 
     </div>
+
+
+    <x-adminlte-modal id="modalQr" title="Código QR" wire:ignore.self>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <img src="{{ $qrImage }}" alt="Código QR" />
+            </div>
+        </div>
+        <x-slot name="footerSlot">
+            <x-adminlte-button theme="danger" label="Cerrar" data-dismiss="modal" wire:click="closeModal" />
+        </x-slot>
+    </x-adminlte-modal>
 </div>
+
+@push('js')
+    <script>
+        Livewire.on('closeModalAfterDelay', () => {
+            setTimeout(() => {
+                @this.call('closeModal');
+            }, 10000); // Cierra el modal después de 10 segundos
+        });
+    </script>
+@endpush

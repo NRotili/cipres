@@ -9,4 +9,5 @@
 
     @livewire('panel.whatsapp.clientes.clientes-index')
 
+
 @stop   

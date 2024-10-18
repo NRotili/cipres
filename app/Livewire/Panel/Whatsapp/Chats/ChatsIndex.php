@@ -15,11 +15,29 @@ class ChatsIndex extends Component
 
     protected $paginationTheme = "bootstrap";
 
+    public $qrImage;
+    public $estadoServicio = "ONLINE";
+    public $modalVisible = false;
+
+
     public $nombre, $apellido, $tipo, $status, $telefono, $cantPagina = 10;
 
     public function updating($nombre)
     {
         $this->resetPage();
+    }
+
+    
+    //Check services
+    public function checkServices()
+    {
+        try {
+            $response = Http::get(env('BOT_WHATSAPP') . 'v1/status');
+            $this->estadoServicio = $response->json('status');
+            Debugbar::info($this->estadoServicio);
+        } catch (\Exception $e) {
+            $this->estadoServicio = "ERROR";
+        }
     }
 
     public function render()
@@ -132,4 +150,29 @@ class ChatsIndex extends Component
 
         $this->render();
     }
+
+
+    public function mount()
+    {
+        $this->checkServices();
+        $this->qrImage = env('BOT_WHATSAPP'); // URL inicial
+    }
+
+
+    // Método para abrir el modal y cargar la nueva imagen
+    public function openModal()
+    {
+        $this->qrImage = env('BOT_WHATSAPP') . '?t=' . now()->timestamp; // Actualizar la imagen con un timestamp para evitar caché
+        $this->modalVisible = true;
+        // Emitir el evento de cierre automático a los 30 segundos
+        $this->dispatch('closeModalAfterDelay');
+    }
+
+    // Método para cerrar el modal
+    public function closeModal()
+    {
+        $this->modalVisible = false;
+    }
+
+
 }

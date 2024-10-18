@@ -27,15 +27,14 @@
                                             <a href="{{ route('panel.categorias.show', $categoria) }}"
                                                 class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top"
                                                 title="Ver">
-                                                <i class="fas fa-eye
-                                        "></i>
+                                                <i class="fas fa-eye"></i>
                                             </a>
 
                                             <button wire:click="editCategoria({{ $categoria }})" data-toggle="modal"
-                                        data-target="#modalCategoria" class="btn btn-warning btn-sm" ><i
-                                            class="fas fa-edit"></i></button>
+                                                data-target="#modalCategoria" class="btn btn-warning btn-sm"><i
+                                                    class="fas fa-edit"></i></button>
                                             {{-- Edit categorie --}}
-                                           
+
 
                                         </div>
 
@@ -60,27 +59,27 @@
 
     {{-- Modal para editar --}}
 
-    <x-adminlte-modal wire:ignore.self id="modalCategoria" title="Nombre:  {{  $categoriaModal->nombre }}">
+    <x-adminlte-modal wire:ignore.self id="modalCategoria" title="Nombre:  {{ $categoriaModal->nombre }}">
         <div>
             <div class="row">
 
                 <div class="col-md-12">
-                    <div class="form-group
-                    ">
+                    <div class="form-group">
                         <label for="descripcion">Descripción</label>
                         <input type="text" wire:model.defer="descripcion" class="form-control" id="descripcion">
-                       
+
+
+                    </div>
+
 
                 </div>
-             
-               
+
             </div>
-            
+            <x-slot name="footerSlot">
+                <x-adminlte-button class="mr-auto" wire:click="updateCategoria()" data-dismiss="modal" theme="success"
+                    label="Actualizar" />
+                <x-adminlte-button theme="danger" label="Cerrar" data-dismiss="modal" />
+            </x-slot>
         </div>
-        <x-slot name="footerSlot">
-            <x-adminlte-button class="mr-auto" wire:click="updateCategoria()" data-dismiss="modal" theme="success" label="Actualizar"/>
-            <x-adminlte-button theme="danger" label="Cerrar" data-dismiss="modal"/>
-        </x-slot>
     </x-adminlte-modal>
 </div>
-
