@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\clienteController;
 use App\Http\Controllers\api\wspController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,6 @@ Route::post('/wsp/listaEspera', [wspController::class, 'listaEspera']);
 Route::put('/wsp/listaEspera/{id}', [wspController::class, 'actualizarListaEspera']);
 Route::post('/wsp/registrarCliente', [wspController::class, 'registrarCliente']);
 Route::get('/wsp/finChat/{id}', [wspController::class, 'finchat']);
+
+//Route Cliente
+Route::get('/cliente/{telefono}', [clienteController::class, 'getClientByTelefono']);

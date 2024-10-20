@@ -64,9 +64,6 @@ class ChatsIndex extends Component
             ->orderBy('created_at', 'ASC')
             ->paginate($this->cantPagina);
 
-
-
-
         return view('livewire.panel.whatsapp.chats.chats-index', compact('chats'));
     }
 
@@ -116,9 +113,6 @@ class ChatsIndex extends Component
                 ->progressBar()
                 ->flash();
         }
-
-
-
 
         $this->render();
     }

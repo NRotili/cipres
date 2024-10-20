@@ -3,7 +3,7 @@
         <div class="d-flex justify-content-between align-items-center" wire:poll.300s="checkServices">
             <h2 class="flex-grow-1">Whatsapp - Chats</h2>
 
-            
+
             @if ($estadoServicio == 'ONLINE')
                 <span class="badge badge-success mr-1 float-right">ONLINE</span>
                 <div class="led led-green float-right mr-3"></div>
@@ -15,7 +15,8 @@
                 <div class="led led-red float-right mr-3"></div>
             @endif
 
-            <button class="btn btn-secondary float-right" wire:click="openModal" data-toggle="modal" data-target="#modalQr">
+            <button @if($estadoServicio !== 'SCAN') disabled @endif class="btn btn-secondary float-right" wire:click="openModal" data-toggle="modal"
+                data-target="#modalQr">
                 <i class="fas fa-qrcode"></i>
             </button>
         </div>
@@ -93,7 +94,7 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody @if (!$modalVisible) wire:poll.10s @endif>
+                        <tbody wire:poll.10s>
 
                             @foreach ($chats as $chat)
                                 <tr>
@@ -185,7 +186,10 @@
     <x-adminlte-modal id="modalQr" title="Código QR" wire:ignore.self>
         <div class="row">
             <div class="col-md-12 text-center">
-                <img src="/panel/proxy-image?url={{ urlencode($qrImage) }}" alt="Código QR" />
+                @if ($estadoServicio == 'SCAN')
+                    <img src="/panel/proxy-image?url={{ urlencode($qrImage) }}" alt="Código QR" />
+                @endif
+                {{-- <img src="{{$qrImage }}" alt="Código QR" /> --}}
             </div>
         </div>
         <x-slot name="footerSlot">
