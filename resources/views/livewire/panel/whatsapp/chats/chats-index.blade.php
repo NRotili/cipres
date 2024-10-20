@@ -185,7 +185,7 @@
     <x-adminlte-modal id="modalQr" title="Código QR" wire:ignore.self>
         <div class="row">
             <div class="col-md-12 text-center">
-                <img src="/proxy-image?url={{ urlencode($qrImage) }}" alt="Código QR" />
+                <img src="/panel/proxy-image?url={{ urlencode($qrImage) }}" alt="Código QR" />
             </div>
         </div>
         <x-slot name="footerSlot">
