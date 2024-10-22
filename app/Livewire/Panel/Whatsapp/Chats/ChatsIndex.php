@@ -149,7 +149,6 @@ class ChatsIndex extends Component
     public function mount()
     {
         $this->checkServices();
-        $this->qrImage = env('BOT_WHATSAPP'); // URL inicial
     }
 
 
