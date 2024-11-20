@@ -55,7 +55,7 @@ class wspController extends Controller
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Chat actualizado',
-                    'cantEsperando' => $cantEsperando,
+                    'cantEsperando' => $cantEsperando+10,
                 ], 200);
             }
         }
@@ -208,7 +208,7 @@ class wspController extends Controller
                     'id' => $chat->id,
                     'status' => 'success',
                     'message' => 'Cliente enviado a la cola de espera',
-                    'cantEsperando' => $cantEsperando,
+                    'cantEsperando' => $cantEsperando+10,
                 ], 200);
             } catch (\Exception $e) {
                 return response()->json([
