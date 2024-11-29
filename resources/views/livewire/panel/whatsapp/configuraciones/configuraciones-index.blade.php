@@ -45,17 +45,19 @@
         <div>
             <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="descripcion">Nombre</label>
                         <input type="text" wire:model.defer="nombre" class="form-control" id="descripcion">
                     </div>
                 </div>
-
-                <div class="col-md-6">
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="valor">Valor</label>
-                        <input type="text" wire:model.defer="valor" class="form-control" id="valor">
+                        <x-adminlte-text-editor wire:model.defer="valor" id="valor" name="teBasic"/>
+                       
                     </div> 
                 </div>
 

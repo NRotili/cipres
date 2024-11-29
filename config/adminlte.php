@@ -90,7 +90,7 @@ return [
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
 
-     /*
+    /*
     |--------------------------------------------------------------------------
     | Preloader Animation
     |--------------------------------------------------------------------------
@@ -248,9 +248,9 @@ return [
     */
 
     'menu' => [
-        
+
         // Sidebar items:
-        
+
         [
             'text'        => 'Dashboard',
             'route'         => 'panel.index',
@@ -276,12 +276,12 @@ return [
 
         ['header' => 'WHATSAPP'],
         [
-            'text'=> 'Clientes',
+            'text' => 'Clientes',
             'route' => 'panel.wsp.clientes.index',
             'icon' => 'fas fa-fw fa-users',
         ],
         [
-            'text'=> 'Pedidos',
+            'text' => 'Pedidos',
             'url' => '#',
             'icon' => 'fas fa-fw fa-shopping-cart',
         ],
@@ -306,7 +306,7 @@ return [
             'url'  => '/user/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
-        
+
     ],
 
     /*
@@ -344,6 +344,21 @@ return [
     */
 
     'plugins' => [
+        'Summernote' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/summernote/summernote-bs4.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/summernote/summernote-bs4.min.css',
+                ],
+            ],
+        ],
         'Datatables' => [
             'active' => false,
             'files' => [
@@ -398,7 +413,7 @@ return [
                     'location' => 'vendor/kartik-v/bootstrap-fileinput/js/locales/es.js',
                 ],
             ],
-        ],    
+        ],
         'BsCustomFileInput' => [
             'active' => false,
             'files' => [
