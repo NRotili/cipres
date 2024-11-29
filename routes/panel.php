@@ -7,6 +7,7 @@ use App\Http\Controllers\Panel\ProductController;
 use App\Http\Controllers\Panel\ProxyController;
 use App\Http\Controllers\Panel\Whatsapp\Chats\ChatController;
 use App\Http\Controllers\Panel\Whatsapp\Clientes\ClienteController;
+use App\Http\Controllers\Panel\Whatsapp\Configuraciones\ConfiguracioneController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -29,6 +30,7 @@ Route::resource('wsp/clientes', ClienteController::class)->names('panel.wsp.clie
 Route::get('wsp/chats', [ChatController::class, 'index'])->name('panel.wsp.chats.index');
 
 Route::get('/proxy-image', [ProxyController::class, 'fetchImage']);
+Route::resource('wsp/configuraciones', ConfiguracioneController::class)->names('panel.wsp.configuraciones');
 
 
 use Illuminate\Support\Facades\Artisan;

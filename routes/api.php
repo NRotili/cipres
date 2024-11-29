@@ -28,3 +28,6 @@ Route::get('/wsp/finChat/{id}', [wspController::class, 'finchat']);
 
 //Route Cliente
 Route::get('/cliente/{telefono}', [clienteController::class, 'getClientByTelefono']);
+
+//Config
+Route::get('/wsp/config', [wspController::class, 'getConfig']);

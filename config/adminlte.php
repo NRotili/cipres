@@ -295,7 +295,11 @@ return [
             'url'  => '#',
             'icon' => 'fas fa-fw fa-envelope',
         ],
-
+        [
+            'text' => 'Configuración',
+            'route'  => 'panel.wsp.configuraciones.index',
+            'icon' => 'fas fa-fw fa-cogs',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

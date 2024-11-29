@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
 use App\Models\Cliente;
+use App\Models\Configuracione;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -218,5 +219,16 @@ class wspController extends Controller
                 ], 500);
             }
         }
+    }
+
+    //getConfig
+    public function getConfig()
+    {
+        $config = Configuracione::all();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Configuraciones',
+            'data' => $config,
+        ], 200);
     }
 }
