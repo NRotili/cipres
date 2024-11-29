@@ -56,8 +56,8 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="valor">Valor</label>
-                        <x-adminlte-text-editor wire:model.defer="valor" id="valor" name="teBasic"/>
-                       
+                        <textarea class="form-control" id="valor" wire:model.defer="valor" rows="8" cols="50">
+                        </textarea>
                     </div> 
                 </div>
 

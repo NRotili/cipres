@@ -345,7 +345,7 @@ return [
 
     'plugins' => [
         'Summernote' => [
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'js',
