@@ -20,36 +20,40 @@ class wspController extends Controller
     {
 
         $clientes = Cliente::where('blacklist', 1)->get();
-        foreach ($clientes as $cliente) {
-            try {
-                $response = Http::post(env('BOT_WHATSAPP') . 'v1/blacklist', [
-                    'number' => $cliente->telefono,
-                    'intent' => 'add',
-                ]);
-            } catch (\Exception $e) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Error al agregar a la blacklist',
-                    'error' => $e->getMessage(),
-                ], 500);
+        if ($clientes->count() > 0) {
+            foreach ($clientes as $cliente) {
+                try {
+                    $response = Http::post(env('BOT_WHATSAPP') . 'v1/blacklist', [
+                        'number' => $cliente->telefono,
+                        'intent' => 'add',
+                    ]);
+                } catch (\Exception $e) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Error al agregar a la blacklist',
+                        'error' => $e->getMessage(),
+                    ], 500);
+                }
             }
         }
-
-        $chats = Chat::whereIn('status', [0, 1, 2])
+    
+        $chats = Chat::whereIn('status', [1, 2])
         ->orderBy('updated_at')->get();
 
-        foreach ($chats as $chat) {
-            try {
-                $response = Http::post(env('BOT_WHATSAPP') . 'v1/blacklist', [
-                    'number' => $chat->cliente->telefono,
-                    'intent' => 'add',
-                ]);
-            } catch (\Exception $e) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Error al agregar a la blacklist',
-                    'error' => $e->getMessage(),
-                ], 500);
+        if ($chats->count() > 0) {
+            foreach ($chats as $chat) {
+                try {
+                    $response = Http::post(env('BOT_WHATSAPP') . 'v1/blacklist', [
+                        'number' => $chat->cliente->telefono,
+                        'intent' => 'add',
+                    ]);
+                } catch (\Exception $e) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Error al agregar a la blacklist',
+                        'error' => $e->getMessage(),
+                    ], 500);
+                }
             }
         }
 
