@@ -280,21 +280,13 @@ return [
             'route' => 'panel.wsp.clientes.index',
             'icon' => 'fas fa-fw fa-users',
         ],
-        [
-            'text' => 'Pedidos',
-            'url' => '#',
-            'icon' => 'fas fa-fw fa-shopping-cart',
-        ],
+
         [
             'text' => 'Chats',
             'route' => 'panel.wsp.chats.index',
             'icon' => 'fas fa-fw fa-comments',
         ],
-        [
-            'text' => 'Mensajes',
-            'url'  => '#',
-            'icon' => 'fas fa-fw fa-envelope',
-        ],
+     
         [
             'text' => 'Configuración',
             'route'  => 'panel.wsp.configuraciones.index',

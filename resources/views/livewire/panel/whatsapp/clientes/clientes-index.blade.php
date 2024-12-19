@@ -79,29 +79,46 @@
 
                                         <div class="btn-group">
 
-                                            {{-- stopBot --}}
-                                            <button wire:loading.attr="disabled"
-                                                wire:click="stopBot({{ $cliente }})" class="btn btn-danger btn-sm">
-                                                <i class="fas fa-pause"></i>
-                                            </button>
+                                            @if ($cliente->blacklist)
+                                                <button wire:loading.attr="disabled"
+                                                    wire:click="blacklist({{ $cliente }})"
+                                                    class="btn btn-warning btn-sm">
+                                                    <i class="fas fa-check-circle"></i>
+                                                </button>
+                                            @else
+                                                <button wire:loading.attr="disabled"
+                                                    wire:click="blacklist({{ $cliente }})"
+                                                    class="btn btn-warning btn-sm">
+                                                    <i class="fas fa-user-slash"></i>
+                                                </button>
 
-                                            {{-- startBot --}}
-                                            <button wire:loading.attr="disabled"
-                                                wire:click="startBot({{ $cliente }})"
-                                                class="btn btn-success btn-sm">
-                                                <i class="fas fa-play"></i>
-                                            </button>
+                                                {{-- stopBot --}}
+                                                <button wire:loading.attr="disabled"
+                                                    wire:click="stopBot({{ $cliente }})"
+                                                    class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-pause"></i>
+                                                </button>
 
-                                            <button wire:click="showmore({{ $cliente->id }})"
+                                                {{-- startBot --}}
+                                                <button wire:loading.attr="disabled"
+                                                    wire:click="startBot({{ $cliente }})"
+                                                    class="btn btn-success btn-sm">
+                                                    <i class="fas fa-play"></i>
+                                                </button>
+                                            @endif
+
+
+
+                                            {{-- <button wire:click="showmore({{ $cliente->id }})"
                                                 class="btn btn-primary btn-sm" data-toggle="modal"
                                                 data-target="#clienteModal">
                                                 <i class="fas fa-info"></i>
-                                            </button>
+                                            </button> --}}
 
-                                            <button wire:click="edit({{ $cliente->id }})" class="btn btn-info btn-sm"
+                                            {{-- <button wire:click="edit({{ $cliente->id }})" class="btn btn-info btn-sm"
                                                 data-toggle="modal" data-target="#clienteModal">
                                                 <i class="fas fa-edit"></i>
-                                            </button>
+                                            </button> --}}
                                         </div>
                                     </td>
                                 </tr>

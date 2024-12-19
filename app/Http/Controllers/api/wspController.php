@@ -7,10 +7,57 @@ use App\Models\Chat;
 use App\Models\Cliente;
 use App\Models\Configuracione;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class wspController extends Controller
 {
+
+
+
+    //blacklist
+    public function blacklist()
+    {
+
+        $clientes = Cliente::where('blacklist', 1)->get();
+        foreach ($clientes as $cliente) {
+            try {
+                $response = Http::post(env('BOT_WHATSAPP') . 'v1/blacklist', [
+                    'number' => $cliente->telefono,
+                    'intent' => 'add',
+                ]);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Error al agregar a la blacklist',
+                    'error' => $e->getMessage(),
+                ], 500);
+            }
+        }
+
+        $chats = Chat::whereIn('status', [0, 1, 2])
+        ->orderBy('updated_at')->get();
+
+        foreach ($chats as $chat) {
+            try {
+                $response = Http::post(env('BOT_WHATSAPP') . 'v1/blacklist', [
+                    'number' => $chat->cliente->telefono,
+                    'intent' => 'add',
+                ]);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Error al agregar a la blacklist',
+                    'error' => $e->getMessage(),
+                ], 500);
+            }
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Clientes agregados a la blacklist',
+        ], 200);
+    }
 
     public function actualizarListaEspera(Request $request, $id)
     {
@@ -46,8 +93,9 @@ class wspController extends Controller
                     'message' => 'Chat no encontrado',
                 ], 404);
             } else {
-                $cantEsperando = Chat::where('status', 1)->orWhere('status', 2)->orderBy('updated_at')->count();
-                
+                $cantEsperando = $cantEsperando = Chat::whereIn('status', [0, 1, 2])
+                ->orderBy('updated_at')->count();
+
                 $chat->status = $request->status;
                 $chat->tipo = $request->tipo;
                 $chat->consulta = $request->consulta;
@@ -56,7 +104,7 @@ class wspController extends Controller
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Chat actualizado',
-                    'cantEsperando' => $cantEsperando+10,
+                    'cantEsperando' => $cantEsperando + 10,
                 ], 200);
             }
         }
@@ -160,7 +208,7 @@ class wspController extends Controller
 
             ],
             [
-                'nombre' => 'required|max:255',
+                'nombre' => 'max:255',
                 'telefono' => 'required|numeric',
                 'tipo' => 'required|max:255',
                 'status' => 'required|numeric',
@@ -182,20 +230,19 @@ class wspController extends Controller
                 $cliente = $response->original['data'];
             }
 
-            $existeChat = Chat::where('client_id', $cliente->id)
-                    ->where('status', 1)
-                    ->orWhere('status', 2)
-                    ->orWhere('status',0)
-                    ->first();
+            $chat = $cliente->chats()
+                ->whereIn('status', [0, 1, 2])
+                ->orderBy('updated_at', 'desc')
+                ->first();
 
-            if ($existeChat) {
+            if ($chat) {
                 return response()->json([
-                    'id' => $existeChat->id,
+                    'id' => $chat->id,
                     'status' => 'success',
                     'message' => 'Ya existe un chat en espera',
                 ], 200);
             }
-            
+
             try {
                 $chat = Chat::create([
                     'client_id' => $cliente->id,
@@ -204,12 +251,14 @@ class wspController extends Controller
                     'status' => $request->status,
                 ]);
 
-                $cantEsperando = Chat::where('status', 1)->orWhere('status', 2)->orderBy('updated_at')->count();
+                $cantEsperando = Chat::whereIn('status', [0, 1, 2])
+                    ->orderBy('updated_at')->count();
+
                 return response()->json([
                     'id' => $chat->id,
                     'status' => 'success',
                     'message' => 'Cliente enviado a la cola de espera',
-                    'cantEsperando' => $cantEsperando+10,
+                    'cantEsperando' => $cantEsperando + 10,
                 ], 200);
             } catch (\Exception $e) {
                 return response()->json([

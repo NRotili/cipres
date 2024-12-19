@@ -16,4 +16,9 @@ class Cliente extends Model
         'localidad',
         'telefono',
     ];
+
+    public function chats()
+    {
+        return $this->hasMany(Chat::class, 'client_id');
+    }
 }
